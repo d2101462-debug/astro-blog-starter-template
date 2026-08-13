@@ -1,0 +1,17 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef3f8;color:#102b50}
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:35px 18px}
+.card{width:min(820px,100%);background:#fff;border:1px solid #d4dfeb;border-radius:8px;box-shadow:0 8px 30px rgba(18,48,78,.12);padding:34px 38px}
+.brand{display:flex;align-items:center;gap:14px;border-bottom:1px solid #e1e8ef;padding-bottom:24px}
+.logo{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#123e73;color:#fff;font-size:25px;font-weight:700}
+.brand-name{font-size:21px;font-weight:700}.brand-subtitle{font-size:13px;color:#66778b;margin-top:4px}
+.intro{text-align:center;padding:30px 0 25px}.intro h1{font-size:26px;margin:0 0 9px}.intro p{color:#52667d;margin:0 0 22px}
+.actions{display:flex;justify-content:center;gap:16px}.btn{border-radius:5px;padding:13px 30px;font-size:16px;font-weight:600;cursor:pointer}
+.primary{background:#1261c9;color:#fff;border:1px solid #1261c9}.secondary{background:#fff;color:#174d88;border:1px solid #78a2d0}
+form{border-top:1px solid #e2e8ef;padding-top:27px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+label{font-size:15px;font-weight:700;color:#18365b}input,select{display:block;width:100%;margin-top:8px;padding:13px 14px;border:1px solid #c9d5e1;border-radius:5px;font-size:15px}
+.full{grid-column:1/-1}.notice{font-size:13px;line-height:1.5;color:#6b5a2c;background:#fff8df;border:1px solid #ead99a;border-radius:5px;padding:12px 14px;margin:22px 0}
+.submit{width:100%;border:0;border-radius:5px;background:#167f88;color:#fff;padding:14px;font-size:16px;font-weight:700;cursor:pointer}
+.result{margin-top:18px;padding:16px;border-radius:5px;background:#edf8f4;border:1px solid #b7ddcf;color:#175d4b}.hidden{display:none}
+footer{text-align:center;color:#7b8794;font-size:12px;margin-top:28px}
+@media(max-width:650px){.card{padding:25px 20px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.actions{flex-direction:column}.btn{width:100%}}
