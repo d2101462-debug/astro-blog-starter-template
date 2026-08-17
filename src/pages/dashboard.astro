@@ -1,161 +1,245 @@
 ---
-const portalName = "Fictional Account Portal";
+const portalName = "Gateway Account Portal";
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title> Frs Gateway — Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{portalName}</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fa;
+        color: #172033;
+      }
+
+      header {
+        background: white;
+        border-bottom: 1px solid #dfe4ea;
+        padding: 18px 8%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .fictional {
+        font-size: 12px;
+        color: #666;
+        margin-top: 3px;
+      }
+
+      main {
+        max-width: 850px;
+        margin: 45px auto;
+        padding: 0 20px;
+      }
+
+      .card {
+        background: white;
+        border: 1px solid #dfe4ea;
+        border-radius: 8px;
+        padding: 35px 45px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      }
+
+      .intro {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+
+      .intro h1 {
+        margin-bottom: 12px;
+        font-size: 25px;
+      }
+
+      .intro p {
+        color: #555;
+        line-height: 1.5;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 25px 0 35px;
+      }
+
+      button,
+      .button {
+        border-radius: 5px;
+        padding: 13px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .signin {
+        background: white;
+        border: 1px solid #1769e0;
+        color: #1769e0;
+      }
+
+      .create {
+        background: #1769e0;
+        border: 1px solid #1769e0;
+        color: white;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #c9d0d8;
+        border-radius: 5px;
+        font-size: 15px;
+      }
+
+      .full {
+        grid-column: 1 / -1;
+      }
+
+      .notice {
+        margin-top: 25px;
+        padding: 14px;
+        background: #f1f4f8;
+        border-radius: 5px;
+        color: #555;
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .submit {
+        width: 100%;
+        margin-top: 25px;
+        background: #167c86;
+        color: white;
+        border: none;
+        font-weight: 600;
+      }
+
+      @media (max-width: 650px) {
+        .card {
+          padding: 25px 20px;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .full {
+          grid-column: auto;
+        }
+
+        .buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <header>
-      <strong>{portalName}</strong>
-
-      <nav>
-        <a href="/">Home</a>
-        <a href="/dashboard">Dashboard</a>
-      </nav>
+      <div>
+        <div class="logo">{portalName}</div>
+        <div class="fictional">Fictional account portal</div>
+      </div>
     </header>
 
     <main>
-      <h1>Welcome, <span id="userName">Account User</span></h1>
-
-      <p class="subtitle">
-        Your fictional account dashboard
-      </p>
-
-      <section class="cards">
-        <div class="card">
-          <span>Account Status</span>
-          <strong>Active</strong>
+      <div class="card">
+        <div class="intro">
+          <h1>Welcome to the Gateway Account Portal</h1>
+          <p>
+            This is a fictional account portal for demonstration purposes.
+          </p>
         </div>
 
-        <div class="card">
-          <span>Profile</span>
-          <strong>Complete</strong>
+        <div class="buttons">
+          <a class="button signin" href="/dashboard">Sign in</a>
+          <a class="button create" href="#create-account">
+            Create an account
+          </a>
         </div>
 
-        <div class="card">
-          <span>Activity</span>
-          <strong>0 transactions</strong>
-        </div>
-      </section>
+        <section id="create-account">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input id="name" type="text" placeholder="Your name" />
+            </div>
 
-      <section class="notice">
-        <strong>Fictional portal</strong>
-        <p>
-          This dashboard is for demonstration purposes only and is not
-          affiliated with any government agency, bank, or financial institution.
-        </p>
-      </section>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input id="email" type="email" placeholder="you@example.com" />
+            </div>
 
-      <button id="logout">Log Out</button>
+            <div class="field">
+              <label for="country">Country</label>
+              <select id="country">
+                <option>United States</option>
+                <option>Canada</option>
+                <option>United Kingdom</option>
+                <option>India</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="mobile">Mobile</label>
+              <input id="mobile" type="tel" placeholder="Phone number" />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" type="password" placeholder="At least 6 characters" />
+            </div>
+
+            <div class="field">
+              <label for="confirm">Confirm Password</label>
+              <input id="confirm" type="password" placeholder="Re-enter password" />
+            </div>
+          </div>
+
+          <div class="notice">
+            No government identification or sensitive identity information is
+            required for this fictional portal.
+          </div>
+
+          <a class="button submit" href="/dashboard">
+            Create Account
+          </a>
+        </section>
+      </div>
     </main>
-
-    <script>
-      const savedName = sessionStorage.getItem("portalUserName");
-
-      if (savedName) {
-        document.getElementById("userName").textContent = savedName;
-      }
-
-      document.getElementById("logout")?.addEventListener("click", () => {
-        sessionStorage.removeItem("portalUserName");
-        window.location.href = "/";
-      });
-    </script>
   </body>
 </html>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #172033;
-  }
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 7%;
-    background: white;
-    border-bottom: 1px solid #ddd;
-  }
-
-  nav a {
-    margin-left: 25px;
-    color: #2457c5;
-    text-decoration: none;
-  }
-
-  main {
-    max-width: 1100px;
-    margin: 45px auto;
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 36px;
-    margin-bottom: 8px;
-  }
-
-  .subtitle {
-    color: #5d6675;
-  }
-
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 35px;
-  }
-
-  .card {
-    background: white;
-    padding: 28px;
-    border-radius: 12px;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
-  }
-
-  .card span {
-    display: block;
-    color: #667085;
-    margin-bottom: 12px;
-  }
-
-  .card strong {
-    font-size: 22px;
-  }
-
-  .notice {
-    margin-top: 30px;
-    padding: 22px;
-    background: #eef4ff;
-    border-left: 4px solid #2457c5;
-    border-radius: 6px;
-  }
-
-  #logout {
-    margin-top: 25px;
-    padding: 12px 22px;
-    border: 0;
-    border-radius: 6px;
-    background: #555;
-    color: white;
-    cursor: pointer;
-  }
-
-  @media (max-width: 700px) {
-    .cards {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
