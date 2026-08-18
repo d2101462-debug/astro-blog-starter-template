@@ -1,53 +1,274 @@
-HTML
-</script>
-  const form = document.getElementById("registrationForm");
+---
+const portalName = "Gateway Account Portal";
+---
 
-  if (form) {
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{portalName}</title>
 
-      const name = document.getElementById("name")?.value.trim();
-      const email = document.getElementById("email")?.value.trim();
-      const country = document.getElementById("country")?.value;
-      const mobile = document.getElementById("mobile")?.value.trim();
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-      const password = document.getElementById("password")?.value;
-      const confirmPassword =
-        document.getElementById("confirmPassword")?.value;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fa;
+      color: #172033;
+    }
 
-      if (!name || !email) {
-        alert("Please enter your name and email.");
-        return;
+    header {
+      background: #12345b;
+      color: white;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .secure {
+      font-size: 13px;
+      opacity: .85;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #12345b;
+    }
+
+    .subtitle {
+      color: #667085;
+      margin-bottom: 28px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd3dd;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 7px;
+      padding: 14px;
+      background: #12345b;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0d2948;
+    }
+
+    #dashboard {
+      display: none;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .balance {
+      background: #12345b;
+      color: white;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .balance-label {
+      opacity: .8;
+      font-size: 14px;
+    }
+
+    .balance-value {
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .stat {
+      background: #f7f9fc;
+      border: 1px solid #e1e6ed;
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .stat-title {
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .notice {
+      margin-top: 24px;
+      padding: 14px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      color: #526071;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
       }
 
-      if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return;
+      header {
+        padding: 16px;
       }
 
-      if (password.length < 8) {
-        alert("Password must contain at least 8 characters.");
-        return;
+      main {
+        margin: 25px auto;
       }
+    }
+  </style>
+</head>
 
-      const accountNumber =
-        "AC-" + Math.floor(10000000 + Math.random() * 90000000);
+<body>
+  <header>
+    <div class="brand">Gateway Account Portal</div>
+    <div class="secure">Secure Portal</div>
+  </header>
 
-      const account = {
-        name: name,
-        email: email,
-        country: country,
-        mobile: mobile,
-        accountNumber: accountNumber
-      };
+  <main>
 
-      localStorage.setItem(
-        "account",
-        JSON.stringify(account)
-      );
+    <!-- CREATE ACCOUNT SCREEN -->
+    <section id="create-account" class="card">
+      <h1>Create Account</h1>
 
-      // Go directly to the dashboard
-      window.location.href = "/dashboard";
+      <p class="subtitle">
+        Create your Gateway Portal account to continue.
+      </p>
+
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input id="name" type="text" placeholder="Enter your full name" />
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" placeholder="Enter your email" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Create a password" />
+      </div>
+
+      <div class="field">
+        <label for="confirm">Confirm Password</label>
+        <input id="confirm" type="password" placeholder="Re-enter your password" />
+      </div>
+
+      <button id="createButton" type="button">
+        Create Account
+      </button>
+
+      <div class="notice">
+        This is a fictional Gateway Account Portal. Do not enter sensitive
+        financial or government identification information.
+      </div>
+    </section>
+
+
+    <!-- DASHBOARD SCREEN -->
+    <section id="dashboard" class="card">
+      <div class="welcome">
+        <h1>Account Dashboard</h1>
+        <p class="subtitle">
+          Welcome to your Gateway Account Portal.
+        </p>
+      </div>
+
+      <div class="balance">
+        <div class="balance-label">Account Overview</div>
+        <div class="balance-value">Portal Account</div>
+      </div>
+
+      <div class="grid">
+        <div class="stat">
+          <div class="stat-title">Account Status</div>
+          <div class="stat-value">Active</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">Account Type</div>
+          <div class="stat-value">Standard</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">Security</div>
+          <div class="stat-value">Protected</div>
+        </div>
+      </div>
+
+      <div class="notice">
+        This dashboard is part of a fictional demonstration portal and is
+        not an official government or Federal Reserve service.
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const createButton = document.getElementById("createButton");
+    const createAccount = document.getElementById("create-account");
+    const dashboard = document.getElementById("dashboard");
+
+    createButton?.addEventListener("click", () => {
+      createAccount.style.display = "none";
+      dashboard.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
-  }
-</script>
+  </script>
+</body>
+</html>
