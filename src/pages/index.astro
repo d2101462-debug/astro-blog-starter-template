@@ -1,21 +1,318 @@
 ---
+const countries = ["United States", "Canada", "United Kingdom", "India", "Australia"];
 ---
 
-<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gateway Account Portal</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create an Account</title>
 
-  <meta http-equiv="refresh" content="0;url=/create-account" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-  <script>
-    window.location.replace("/create-account");
-  </script>
-</head>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f5fa;
+        color: #10133a;
+      }
 
-<body>
-  <p>Opening Gateway Account Portal...</p>
-</body>
+      .page {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 45px 20px;
+      }
+
+      .card {
+        width: 800px;
+        max-width: 100%;
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        margin-bottom: 45px;
+      }
+
+      .tab {
+        height: 62px;
+        padding: 0 48px;
+        border-radius: 8px;
+        border: 2px solid #3436a4;
+        background: white;
+        color: #3436a4;
+        font-size: 21px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .tab.active {
+        background: #3336bd;
+        color: white;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 27px 30px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .field.full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: 21px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        height: 58px;
+        border: 1px solid #c4c9d8;
+        border-radius: 8px;
+        background: #fff;
+        padding: 0 22px;
+        font-size: 20px;
+        color: #15183e;
+        outline: none;
+      }
+
+      input:focus,
+      select:focus {
+        border: 2px solid #3c6ee8;
+        box-shadow: 0 0 0 2px rgba(60, 110, 232, 0.1);
+      }
+
+      .password-row {
+        position: relative;
+      }
+
+      .password-row input {
+        padding-right: 55px;
+      }
+
+      .password-note {
+        margin-top: 10px;
+        color: #737891;
+        font-size: 15px;
+      }
+
+      .info {
+        margin-top: 32px;
+        color: #515778;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .submit {
+        margin-top: 30px;
+        width: 100%;
+        height: 58px;
+        border: 0;
+        border-radius: 8px;
+        background: #3336bd;
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .submit:hover {
+        background: #292ca5;
+      }
+
+      @media (max-width: 700px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .field.full {
+          grid-column: auto;
+        }
+
+        .tabs {
+          gap: 8px;
+        }
+
+        .tab {
+          padding: 0 22px;
+          font-size: 17px;
+        }
+
+        label {
+          font-size: 18px;
+        }
+
+        input,
+        select {
+          font-size: 17px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="page">
+      <section class="card">
+
+        <div class="tabs">
+          <button class="tab" type="button" onclick="location.href='/'">
+            Sign in
+          </button>
+
+          <button class="tab active" type="button">
+            Create an account
+          </button>
+        </div>
+
+        <form id="registrationForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Your name"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="taxid">Identification Number</label>
+              <input
+                id="taxid"
+                type="text"
+                placeholder="XXX-XX-XXXX"
+                inputmode="numeric"
+              />
+              <div class="password-note">
+                Demo field — do not enter a real SSN.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="country">Country</label>
+              <select id="country">
+                {countries.map((country) => (
+                  <option value={country}>{country}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="mobile">Mobile</label>
+              <input
+                id="mobile"
+                type="tel"
+                placeholder="000-000-0000"
+                autocomplete="tel"
+              />
+            </div>
+
+            <div class="field">
+              <label for="alternate">Alternate Mobile</label>
+              <input
+                id="alternate"
+                type="tel"
+                placeholder="000-000-0000"
+              />
+            </div>
+
+            <div class="field full">
+              <label for="address">Registered Address</label>
+              <input
+                id="address"
+                type="text"
+                placeholder="Enter your address"
+                autocomplete="street-address"
+              />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <div class="password-row">
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Enter password"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+              <div class="password-note">
+                At least 8 characters
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="confirmPassword">Confirm Password</label>
+              <input
+                id="confirmPassword"
+                type="password"
+                placeholder="Re-enter password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+
+          </div>
+
+          <div class="info">
+            Account Number will be generated after signup.
+            Case ID can be assigned later.
+          </div>
+
+          <button class="submit" type="submit">
+            Create Account
+          </button>
+
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById("registrationForm");
+
+      form?.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const password = document.getElementById("password").value;
+        const confirm = document.getElementById("confirmPassword").value;
+
+        if (password !== confirm) {
+          alert("Passwords do not match.");
+          return;
+        }
+
+        alert("Account created successfully.");
+      });
+    </script>
+  </body>
 </html>
