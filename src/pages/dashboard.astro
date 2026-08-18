@@ -1,263 +1,247 @@
 ---
-const title = "Gateway Account Portal";
+const portalName = "Gateway Account Portal";
 ---
 
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
+  <title>{portalName}</title>
 
   <style>
-    :root {
-      font-family: Inter, Arial, sans-serif;
-      color: #172033;
-      background: #f4f7fb;
-    }
-
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      background: #f4f7fb;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f9;
+      color: #172033;
+    }
+
+    .topbar {
+      height: 58px;
+      background: #111b55;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 600;
     }
 
     .layout {
       display: flex;
-      min-height: 100vh;
+      min-height: calc(100vh - 58px);
     }
 
-    /* Sidebar */
     .sidebar {
-      width: 250px;
-      background: #102a43;
-      color: white;
-      padding: 26px 18px;
-      position: fixed;
-      inset: 0 auto 0 0;
+      width: 235px;
+      background: #fff;
+      border-right: 1px solid #d7dce5;
+      display: flex;
+      flex-direction: column;
     }
 
-    .brand {
+    .logo {
+      padding: 24px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo-title {
       font-size: 20px;
       font-weight: 700;
-      padding: 0 12px 30px;
-      border-bottom: 1px solid rgba(255,255,255,.15);
+      color: #18235f;
     }
 
-    .brand small {
-      display: block;
-      margin-top: 6px;
+    .logo-subtitle {
+      margin-top: 4px;
       font-size: 11px;
-      font-weight: 400;
-      opacity: .7;
+      color: #697386;
+      letter-spacing: 1px;
     }
 
-    nav {
-      margin-top: 25px;
+    .menu-title {
+      padding: 16px 20px 8px;
+      font-size: 11px;
+      color: #70798b;
+      font-weight: 700;
     }
 
-    nav a {
+    .menu a {
       display: block;
-      padding: 13px 14px;
-      margin-bottom: 6px;
-      color: #dce8f5;
+      padding: 12px 20px;
+      color: #202942;
       text-decoration: none;
-      border-radius: 7px;
       font-size: 14px;
+      border-radius: 5px;
+      margin: 2px 10px;
     }
 
-    nav a:hover,
-    nav a.active {
-      background: #1d496d;
+    .menu a:hover,
+    .menu a.active {
+      background: #202b76;
       color: white;
     }
 
     .logout {
-      position: absolute;
-      bottom: 25px;
-      left: 30px;
-      color: #dce8f5;
-      text-decoration: none;
+      margin-top: auto;
+      padding: 20px;
+      border-top: 1px solid #ddd;
+    }
+
+    .logout a {
+      color: #596174;
+      text-decoration: underline;
+      font-size: 13px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 28px 32px;
+    }
+
+    .account-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 25px;
+    }
+
+    .account-details {
+      line-height: 1.8;
       font-size: 14px;
     }
 
-    /* Main */
-    .main {
-      margin-left: 250px;
-      width: calc(100% - 250px);
+    .account-details strong {
+      color: #18235f;
     }
 
-    header {
-      height: 76px;
-      background: white;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 36px;
+    .security {
+      text-align: right;
+      font-size: 13px;
+      line-height: 2;
     }
 
-    .header-title {
-      font-size: 18px;
-      font-weight: 600;
+    .status {
+      display: inline-block;
+      background: #16834b;
+      color: white;
+      border-radius: 12px;
+      padding: 1px 10px;
+      font-size: 11px;
+      margin-left: 5px;
     }
 
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    h1 {
+      font-size: 30px;
+      font-weight: 500;
+      margin: 15px 0 30px;
     }
 
-    .avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #dbeafe;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      color: #174a73;
-    }
-
-    main {
-      padding: 35px;
-      max-width: 1400px;
-    }
-
-    .welcome {
-      margin-bottom: 28px;
-    }
-
-    .welcome h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .welcome p {
-      color: #64748b;
-      margin-top: 7px;
-    }
-
-    /* Cards */
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-      margin-bottom: 25px;
+      margin-bottom: 28px;
     }
 
     .card {
       background: white;
-      border: 1px solid #e3e8ef;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(15,23,42,.04);
+      padding: 22px;
+      border-radius: 5px;
+      border: 1px solid #dce1e8;
+      min-height: 105px;
     }
 
     .card-label {
-      color: #64748b;
       font-size: 13px;
+      color: #56627a;
       margin-bottom: 10px;
     }
 
-    .amount {
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: -.5px;
+    .card-value {
+      font-size: 29px;
+      font-weight: 400;
+      color: #1d2944;
     }
 
-    .positive {
-      margin-top: 8px;
-      color: #16724a;
-      font-size: 13px;
-    }
-
-    .content-grid {
+    .tables {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 22px;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
 
-    .section-title {
-      margin: 0 0 18px;
-      font-size: 17px;
+    .table-box {
+      background: white;
+      border: 1px solid #dce1e8;
+      border-radius: 5px;
+      overflow: hidden;
     }
 
-    /* Transactions */
-    .transaction {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 0;
-      border-bottom: 1px solid #edf0f4;
-    }
-
-    .transaction:last-child {
-      border-bottom: 0;
-    }
-
-    .transaction-name {
-      font-weight: 600;
+    .table-title {
+      padding: 14px 16px;
       font-size: 14px;
+      font-weight: 700;
+      border-bottom: 1px solid #dce1e8;
     }
 
-    .transaction-date {
-      color: #8995a5;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
       font-size: 12px;
-      margin-top: 4px;
+      padding: 12px;
+      color: #47536b;
+      border-bottom: 1px solid #e0e4ea;
     }
 
-    .transaction-amount {
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .credit {
-      color: #16724a;
-    }
-
-    .debit {
-      color: #334155;
-    }
-
-    /* Account details */
-    .detail {
-      display: flex;
-      justify-content: space-between;
-      padding: 13px 0;
-      border-bottom: 1px solid #edf0f4;
+    td {
+      padding: 18px 12px;
       font-size: 13px;
+      color: #6a7384;
     }
 
-    .detail span:first-child {
-      color: #64748b;
+    .empty {
+      text-align: center;
+      padding: 30px 10px;
     }
 
-    .notice {
-      margin-top: 24px;
-      padding: 14px 18px;
-      background: #fff8e6;
-      border: 1px solid #f1d58a;
-      border-radius: 8px;
-      color: #6b5415;
+    .footer {
+      text-align: center;
+      margin-top: 45px;
+      color: #667085;
       font-size: 12px;
-      line-height: 1.5;
+    }
+
+    .demo-label {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      background: #b42318;
+      color: white;
+      padding: 7px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+      z-index: 20;
     }
 
     @media (max-width: 900px) {
       .sidebar {
-        width: 210px;
+        width: 190px;
       }
 
-      .main {
-        margin-left: 210px;
-        width: calc(100% - 210px);
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .cards,
-      .content-grid {
+      .tables {
         grid-template-columns: 1fr;
       }
     }
@@ -268,158 +252,177 @@ const title = "Gateway Account Portal";
       }
 
       .main {
-        margin-left: 0;
-        width: 100%;
+        padding: 20px;
       }
 
-      header {
-        padding: 0 18px;
+      .account-info {
+        display: block;
       }
 
-      main {
-        padding: 22px 16px;
+      .security {
+        text-align: left;
+        margin-top: 15px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 
 <body>
+
+  <div class="topbar">
+    ☎ Demo Support: Fictional Gateway Portal
+  </div>
+
   <div class="layout">
 
     <aside class="sidebar">
-      <div class="brand">
-        Gateway Portal
-        <small>Account Services</small>
+
+      <div class="logo">
+        <div class="logo-title">GATEWAY</div>
+        <div class="logo-subtitle">ACCOUNT PORTAL</div>
       </div>
 
-      <nav>
-        <a href="/dashboard" class="active">Overview</a>
-        <a href="/dashboard">Account</a>
-        <a href="/dashboard">Activity</a>
-        <a href="/dashboard">Statements</a>
-        <a href="/dashboard">Settings</a>
+      <div class="menu-title">MENU</div>
+
+      <nav class="menu">
+        <a href="/dashboard" class="active">▣ &nbsp; Dashboard</a>
+        <a href="#">▤ &nbsp; Deposit</a>
+        <a href="#">▣ &nbsp; Withdraw</a>
+        <a href="#">⇄ &nbsp; Transfer</a>
+        <a href="#">◌ &nbsp; Transactions</a>
+        <a href="#">▱ &nbsp; Support Ticket</a>
+        <a href="#">⚙ &nbsp; Settings</a>
       </nav>
 
-      <a class="logout" href="/">Sign out</a>
+      <div class="logout">
+        <a href="/">↪ &nbsp; Log Out</a>
+      </div>
+
     </aside>
 
-    <div class="main">
+    <main class="main">
 
-      <header>
-        <div class="header-title">Account Overview</div>
+      <div class="account-info">
 
-        <div class="profile">
+        <div class="account-details">
           <div>
-            <strong>Account Holder</strong>
-          </div>
-          <div class="avatar">A</div>
-        </div>
-      </header>
-
-      <main>
-
-        <section class="welcome">
-          <h1>Welcome back</h1>
-          <p>Here's an overview of your account activity.</p>
-        </section>
-
-        <section class="cards">
-
-          <div class="card">
-            <div class="card-label">Current Balance</div>
-            <div class="amount">$25,000.00</div>
-            <div class="positive">Account balance</div>
+            <strong>Account No:</strong>
+            DEMO-482731
+            &nbsp; | &nbsp;
+            <strong>ID:</strong>
+            ****1204
           </div>
 
-          <div class="card">
-            <div class="card-label">Available Funds</div>
-            <div class="amount">$25,000.00</div>
-            <div class="positive">Available</div>
+          <div>
+            <strong>Name:</strong>
+            Sample User
+            &nbsp; | &nbsp;
+            <strong>Case ID:</strong>
+            DEMO-001
           </div>
-
-          <div class="card">
-            <div class="card-label">Account Status</div>
-            <div class="amount" style="font-size:24px;">Active</div>
-            <div class="positive">Account in good standing</div>
-          </div>
-
-        </section>
-
-        <section class="content-grid">
-
-          <div class="card">
-            <h2 class="section-title">Recent Activity</h2>
-
-            <div class="transaction">
-              <div>
-                <div class="transaction-name">Account Credit</div>
-                <div class="transaction-date">August 18, 2026</div>
-              </div>
-              <div class="transaction-amount credit">+$2,500.00</div>
-            </div>
-
-            <div class="transaction">
-              <div>
-                <div class="transaction-name">Account Adjustment</div>
-                <div class="transaction-date">August 16, 2026</div>
-              </div>
-              <div class="transaction-amount debit">-$350.00</div>
-            </div>
-
-            <div class="transaction">
-              <div>
-                <div class="transaction-name">Account Credit</div>
-                <div class="transaction-date">August 12, 2026</div>
-              </div>
-              <div class="transaction-amount credit">+$1,200.00</div>
-            </div>
-
-            <div class="transaction">
-              <div>
-                <div class="transaction-name">Service Adjustment</div>
-                <div class="transaction-date">August 10, 2026</div>
-              </div>
-              <div class="transaction-amount debit">-$125.00</div>
-            </div>
-
-          </div>
-
-          <div class="card">
-            <h2 class="section-title">Account Details</h2>
-
-            <div class="detail">
-              <span>Account Type</span>
-              <strong>Standard</strong>
-            </div>
-
-            <div class="detail">
-              <span>Status</span>
-              <strong>Active</strong>
-            </div>
-
-            <div class="detail">
-              <span>Member Since</span>
-              <strong>2026</strong>
-            </div>
-
-            <div class="detail">
-              <span>Account ID</span>
-              <strong>•••• 4821</strong>
-            </div>
-
-          </div>
-
-        </section>
-
-        <div class="notice">
-          <strong>Fictional demonstration portal.</strong>
-          This dashboard is for demonstration purposes only and is not
-          connected to the Federal Reserve, any government agency, bank,
-          or financial institution.
         </div>
 
-      </main>
-    </div>
+        <div class="security">
+          Demo Security:
+          <span class="status">ON</span>
+          <br />
+
+          Demo Connection:
+          <span class="status">ON</span>
+        </div>
+
+      </div>
+
+      <h1>Dashboard</h1>
+
+      <section class="cards">
+
+        <div class="card">
+          <div class="card-label">Balance</div>
+          <div class="card-value">$25,000.00</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Pending Deposits</div>
+          <div class="card-value">0</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Pending Withdrawals</div>
+          <div class="card-value">0</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Today Transactions</div>
+          <div class="card-value">0</div>
+        </div>
+
+      </section>
+
+      <section class="tables">
+
+        <div class="table-box">
+          <div class="table-title">Latest Credits</div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Txn</th>
+                <th>Source</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="5" class="empty">
+                  No credits yet.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-box">
+          <div class="table-title">Latest Debits</div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Txn</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="4" class="empty">
+                  No debits yet.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <div class="footer">
+        Fictional Gateway Account Portal — created for demonstration purposes.
+      </div>
+
+    </main>
+
   </div>
+
+  <div class="demo-label">FICTIONAL DEMO</div>
+
 </body>
 </html>
