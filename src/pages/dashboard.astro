@@ -229,12 +229,42 @@
 
   <script>
     const storedAccount = localStorage.getItem("account");
+<script>
+  const storedAccount = localStorage.getItem("account");
 
-    if (!storedAccount) {
-      window.location.href = "/";
-    } else {
-      const account = JSON.parse(storedAccount);
+  const account = storedAccount
+    ? JSON.parse(storedAccount)
+    : {
+        name: "Test User",
+        email: "test@example.com",
+        country: "United States",
+        mobile: "000-000-0000",
+        accountNumber: "AC-00000000"
+      };
 
+  document.getElementById("userName").textContent =
+    account.name;
+
+  document.getElementById("name").textContent =
+    account.name;
+
+  document.getElementById("email").textContent =
+    account.email;
+
+  document.getElementById("country").textContent =
+    account.country;
+
+  document.getElementById("mobile").textContent =
+    account.mobile;
+
+  document.getElementById("accountNumber").textContent =
+    account.accountNumber;
+
+  document.getElementById("logout").addEventListener("click", () => {
+    localStorage.removeItem("account");
+    window.location.href = "/";
+  });
+</script>
       document.getElementById("userName").textContent =
         account.name || "User";
 
