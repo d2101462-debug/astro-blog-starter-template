@@ -1,11 +1,9 @@
-html
-<title>FRS Gateway Portal</title>
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{FRS Gateway}</title>
+  <title>Account Portal</title>
 
   <style>
     * {
@@ -14,7 +12,7 @@ html
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f3f6fa;
       color: #172033;
     }
@@ -35,11 +33,11 @@ html
 
     .secure {
       font-size: 13px;
-      opacity: .85;
+      opacity: 0.85;
     }
 
     main {
-      max-width: 1100px;
+      max-width: 900px;
       margin: 45px auto;
       padding: 0 20px;
     }
@@ -48,7 +46,7 @@ html
       background: white;
       border-radius: 12px;
       padding: 32px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
     h1 {
@@ -99,174 +97,143 @@ html
       display: none;
     }
 
-    .welcome {
-      margin-bottom: 25px;
-    }
-
-    .balance {
-      background: #12345b;
-      color: white;
-      border-radius: 12px;
-      padding: 28px;
-      margin-bottom: 24px;
-    }
-
-    .balance-label {
-      opacity: .8;
-      font-size: 14px;
-    }
-
-    .balance-value {
-      font-size: 36px;
-      font-weight: 700;
-      margin-top: 8px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .stat {
-      background: #f7f9fc;
-      border: 1px solid #e1e6ed;
-      border-radius: 10px;
-      padding: 22px;
-    }
-
-    .stat-title {
-      color: #667085;
-      font-size: 13px;
-    }
-
-    .stat-value {
-      font-size: 20px;
-      font-weight: 700;
-      margin-top: 8px;
-    }
-
-    .notice {
-      margin-top: 24px;
-      padding: 14px;
-      background: #f1f5f9;
+    .account-box {
+      background: #f3f6fa;
       border-radius: 8px;
-      color: #526071;
-      font-size: 13px;
+      padding: 18px;
+      margin-top: 20px;
     }
 
-    @media (max-width: 700px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
+    .account-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
 
-      header {
-        padding: 16px;
-      }
+    .account-row:last-child {
+      border-bottom: 0;
+    }
 
-      main {
-        margin: 25px auto;
-      }
+    .label {
+      color: #667085;
     }
   </style>
 </head>
 
 <body>
+
   <header>
-    <div class="brand">Gateway Account Portal</div>
-    <div class="secure">Secure Portal</div>
+    <div class="brand">Account Portal</div>
+    <div class="secure">Fictional test portal</div>
   </header>
 
   <main>
 
-    <!-- CREATE ACCOUNT SCREEN -->
-    <section id="create-account" class="card">
-      <h1>Create Account</h1>
+    <section id="registration" class="card">
+      <h1>Create Test Account</h1>
 
       <p class="subtitle">
-        Create your Gateway Portal account to continue.
+        Use test information only. No real passwords or financial information are required.
       </p>
 
-      <div class="field">
-        <label for="name">Full Name</label>
-        <input id="name" type="text" placeholder="Enter your full name" />
-      </div>
+      <form id="registrationForm">
 
-      <div class="field">
-        <label for="email">Email Address</label>
-        <input id="email" type="email" placeholder="Enter your email" />
-      </div>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" required />
+        </div>
 
-      <div class="field">
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Create a password" />
-      </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" required />
+        </div>
 
-      <div class="field">
-        <label for="confirm">Confirm Password</label>
-        <input id="confirm" type="password" placeholder="Re-enter your password" />
-      </div>
+        <div class="field">
+          <label for="country">Country</label>
+          <input id="country" type="text" required />
+        </div>
 
-      <button id="createButton" type="button">
-        Create Account
-      </button>
+        <div class="field">
+          <label for="mobile">Mobile</label>
+          <input id="mobile" type="text" required />
+        </div>
 
-      <div class="notice">
-        This is a fictional Gateway Account Portal. Do not enter sensitive
-        financial or government identification information.
-      </div>
+        <button type="submit">Create Test Account</button>
+
+      </form>
     </section>
 
 
-    <!-- DASHBOARD SCREEN -->
     <section id="dashboard" class="card">
-      <div class="welcome">
-        <h1>Account Dashboard</h1>
-        <p class="subtitle">
-          Welcome to your Gateway Account Portal.
-        </p>
-      </div>
 
-      <div class="balance">
-        <div class="balance-label">Account Overview</div>
-        <div class="balance-value">Portal Account</div>
-      </div>
+      <h1>Account Dashboard</h1>
 
-      <div class="grid">
-        <div class="stat">
-          <div class="stat-title">Account Status</div>
-          <div class="stat-value">Active</div>
+      <p class="subtitle">
+        Test account information
+      </p>
+
+      <div class="account-box">
+
+        <div class="account-row">
+          <span class="label">Name</span>
+          <strong id="displayName"></strong>
         </div>
 
-        <div class="stat">
-          <div class="stat-title">Account Type</div>
-          <div class="stat-value">Standard</div>
+        <div class="account-row">
+          <span class="label">Email</span>
+          <strong id="displayEmail"></strong>
         </div>
 
-        <div class="stat">
-          <div class="stat-title">Security</div>
-          <div class="stat-value">Protected</div>
+        <div class="account-row">
+          <span class="label">Country</span>
+          <strong id="displayCountry"></strong>
         </div>
+
+        <div class="account-row">
+          <span class="label">Mobile</span>
+          <strong id="displayMobile"></strong>
+        </div>
+
+        <div class="account-row">
+          <span class="label">Test Account Number</span>
+          <strong id="displayAccount"></strong>
+        </div>
+
       </div>
 
-      <div class="notice">
-        This dashboard is part of a fictional demonstration portal and is
-        not an official government or Federal Reserve service.
-      </div>
     </section>
 
   </main>
 
-  <script>
-    const createButton = document.getElementById("createButton");
-    const createAccount = document.getElementById("create-account");
-    const dashboard = document.getElementById("dashboard");
 
-    createButton?.addEventListener("click", () => {
-      createAccount.style.display = "none";
-      dashboard.style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  <script>
+    const form = document.getElementById("registrationForm");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const account = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        country: document.getElementById("country").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
+        accountNumber:
+          "TEST-" +
+          Math.floor(10000000 + Math.random() * 90000000)
+      };
+
+      document.getElementById("displayName").textContent = account.name;
+      document.getElementById("displayEmail").textContent = account.email;
+      document.getElementById("displayCountry").textContent = account.country;
+      document.getElementById("displayMobile").textContent = account.mobile;
+      document.getElementById("displayAccount").textContent =
+        account.accountNumber;
+
+      document.getElementById("registration").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
     });
   </script>
+
 </body>
 </html>
