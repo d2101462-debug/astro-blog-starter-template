@@ -1,5 +1,5 @@
 ---
-const portalName = "Gateway Account Portal";
+const portalName = "FRS Account Portal";
 ---
 
 <!doctype html>
@@ -7,7 +7,7 @@ const portalName = "Gateway Account Portal";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{portalName}</title>
+  <title>{frs gateway}</title>
 
   <style>
     * {
@@ -17,115 +17,257 @@ const portalName = "Gateway Account Portal";
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      background: #f3f6fa;
       color: #172033;
     }
 
-    .header {
-      background: #123b78;
+    header {
+      background: #12345b;
       color: white;
-      padding: 22px;
-      text-align: center;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .header h1 {
-      margin: 0;
-      font-size: 28px;
+    .brand {
+      font-size: 21px;
+      font-weight: 700;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 20px;
+    .secure {
+      font-size: 13px;
+      opacity: .85;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 45px auto;
+      padding: 0 20px;
     }
 
     .card {
       background: white;
       border-radius: 12px;
-      padding: 45px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.10);
-      text-align: center;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
     }
 
-    .card h2 {
-      font-size: 30px;
-      margin-bottom: 15px;
+    h1 {
+      margin-top: 0;
+      color: #12345b;
     }
 
-    .card p {
-      color: #555;
-      line-height: 1.6;
+    .subtitle {
+      color: #667085;
+      margin-bottom: 28px;
     }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
+    .field {
+      margin-bottom: 18px;
     }
 
-    .button {
-      display: inline-block;
-      padding: 14px 28px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      border: 1px solid #1769d1;
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
     }
 
-    .primary {
-      background: #1769d1;
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd3dd;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 7px;
+      padding: 14px;
+      background: #12345b;
       color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    .secondary {
-      background: white;
-      color: #1769d1;
+    button:hover {
+      background: #0d2948;
+    }
+
+    #dashboard {
+      display: none;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .balance {
+      background: #12345b;
+      color: white;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .balance-label {
+      opacity: .8;
+      font-size: 14px;
+    }
+
+    .balance-value {
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .stat {
+      background: #f7f9fc;
+      border: 1px solid #e1e6ed;
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .stat-title {
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 8px;
     }
 
     .notice {
-      margin-top: 30px;
-      padding: 15px;
-      background: #eef5ff;
-      border-radius: 6px;
-      font-size: 14px;
+      margin-top: 24px;
+      padding: 14px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      color: #526071;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 16px;
+      }
+
+      main {
+        margin: 25px auto;
+      }
     }
   </style>
 </head>
 
 <body>
-
-  <header class="header">
-    <h1>{portalName}</h1>
+  <header>
+    <div class="brand">Gateway Account Portal</div>
+    <div class="secure">Secure Portal</div>
   </header>
 
-  <main class="container">
-    <section class="card">
+  <main>
 
-      <h2>Welcome</h2>
+    <!-- CREATE ACCOUNT SCREEN -->
+    <section id="create-account" class="card">
+      <h1>Create Account</h1>
 
-      <p>
-        Welcome to the Gateway Account Portal.
-        Create a fictional account or sign in to continue.
+      <p class="subtitle">
+        Create your Gateway Portal account to continue.
       </p>
 
-      <div class="buttons">
-        <a class="button secondary" href="/signin">
-          Sign in
-        </a>
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input id="name" type="text" placeholder="Enter your full name" />
+      </div>
 
-        <a class="button primary" href="/create-account">
-          Create an account
-        </a>
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" placeholder="Enter your email" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Create a password" />
+      </div>
+
+      <div class="field">
+        <label for="confirm">Confirm Password</label>
+        <input id="confirm" type="password" placeholder="Re-enter your password" />
+      </div>
+
+      <button id="createButton" type="button">
+        Create Account
+      </button>
+
+      <div class="notice">
+        This is a FDIC Portal for safeguarding legal assests.
+      </div>
+    </section>
+
+
+    <!-- DASHBOARD SCREEN -->
+    <section id="dashboard" class="card">
+      <div class="welcome">
+        <h1>Account Dashboard</h1>
+        <p class="subtitle">
+          Welcome to your FDIC Gateway Portal.
+        </p>
+      </div>
+
+      <div class="balance">
+        <div class="balance-label">Account Overview</div>
+        <div class="balance-value">Portal Account</div>
+      </div>
+
+      <div class="grid">
+        <div class="stat">
+          <div class="stat-title">Account Status</div>
+          <div class="stat-value">Active</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">Account Type</div>
+          <div class="stat-value">Standard</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-title">Security</div>
+          <div class="stat-value">Protected</div>
+        </div>
       </div>
 
       <div class="notice">
-        This is a fictional demonstration portal and is not connected
-        to any government agency, bank, or financial institution.
+        This dashboard is part of a FDIC portal and
+         government or Federal Reserve service.
       </div>
-
     </section>
+
   </main>
 
+  <script>
+    const createButton = document.getElementById("createButton");
+    const createAccount = document.getElementById("create-account");
+    const dashboard = document.getElementById("dashboard");
+
+    createButton?.addEventListener("click", () => {
+      createAccount.style.display = "none";
+      dashboard.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
 </body>
 </html>
