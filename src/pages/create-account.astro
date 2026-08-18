@@ -1,245 +1,501 @@
 ---
-const portalName = "Gateway Account Portal";
+const portalName = "FRS Account Portal";
+
+const account = {
+  number: "xxxx-600951",
+  id: "****5608",
+  name: "Daniel Smith",
+  caseId: "ms-001",
+  balance: "$25,000.00",
+  pendingDeposits: "0",
+  pendingWithdrawals: "0",
+  transactions: "0",
+};
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{portalName}</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{portalName}</title>
 
-    <style>
-      * {
-        box-sizing: border-box;
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f8fa;
+      color: #17233f;
+    }
+
+    .topbar {
+      height: 58px;
+      background: #11184d;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .page {
+      display: flex;
+      min-height: calc(100vh - 58px);
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #d9dee7;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      height: 90px;
+      padding: 20px;
+      border-bottom: 1px solid #d9dee7;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1c2864;
+    }
+
+    .brand-subtitle {
+      margin-top: 5px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #737d91;
+    }
+
+    .menu-heading {
+      font-size: 11px;
+      font-weight: 700;
+      color: #70798b;
+      padding: 15px 20px 8px;
+    }
+
+    .menu {
+      padding: 0 10px;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 43px;
+      padding: 0 14px;
+      margin-bottom: 3px;
+      border-radius: 5px;
+      color: #202a43;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #252c78;
+      color: white;
+    }
+
+    .icon {
+      width: 18px;
+      text-align: center;
+    }
+
+    .logout {
+      margin-top: auto;
+      border-top: 1px solid #d9dee7;
+      padding: 20px;
+    }
+
+    .logout a {
+      color: #4f5a70;
+      font-size: 13px;
+      text-decoration: underline;
+    }
+
+    /* MAIN */
+
+    .content {
+      flex: 1;
+      padding: 28px 28px 40px;
+      min-width: 0;
+    }
+
+    .account-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .account-row strong {
+      color: #18265d;
+    }
+
+    .security {
+      text-align: right;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .on {
+      display: inline-block;
+      min-width: 37px;
+      text-align: center;
+      padding: 0 8px;
+      border-radius: 12px;
+      background: #17844d;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 30px;
+      font-size: 29px;
+      font-weight: 500;
+      color: #17213e;
+    }
+
+    /* SUMMARY */
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      margin-bottom: 24px;
+    }
+
+    .summary-item {
+      min-height: 92px;
+      padding: 8px 12px 15px;
+      border-bottom: 1px solid #dce1e8;
+    }
+
+    .summary-label {
+      color: #53617b;
+      font-size: 13px;
+      margin-bottom: 9px;
+    }
+
+    .summary-value {
+      font-size: 29px;
+      font-weight: 400;
+      color: #273451;
+    }
+
+    /* TABLES */
+
+    .tables {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .table-card {
+      background: white;
+      border: 1px solid #d8dee8;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .table-heading {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      font-weight: 700;
+      font-size: 14px;
+      border-bottom: 1px solid #d8dee8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 11px 8px;
+      text-align: left;
+      font-size: 12px;
+      color: #303b54;
+      border-bottom: 1px solid #e0e4eb;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 20px 8px;
+      font-size: 13px;
+      color: #667085;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 28px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      color: #69748a;
+      font-size: 12px;
+    }
+
+    .fictional {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      padding: 6px 10px;
+      background: #a82424;
+      color: white;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: bold;
+      z-index: 50;
+    }
+
+    @media (max-width: 950px) {
+      .sidebar {
+        width: 205px;
       }
 
-      body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f5f7fa;
-        color: #172033;
+      .summary {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      header {
-        background: white;
-        border-bottom: 1px solid #dfe4ea;
-        padding: 18px 8%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .tables {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .sidebar {
+        display: none;
       }
 
-      .logo {
-        font-size: 22px;
-        font-weight: 700;
+      .content {
+        padding: 20px;
       }
 
-      .fictional {
-        font-size: 12px;
-        color: #666;
-        margin-top: 3px;
+      .account-row {
+        display: block;
       }
 
-      main {
-        max-width: 850px;
-        margin: 45px auto;
-        padding: 0 20px;
+      .security {
+        text-align: left;
+        margin-top: 12px;
       }
 
-      .card {
-        background: white;
-        border: 1px solid #dfe4ea;
-        border-radius: 8px;
-        padding: 35px 45px;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      .summary {
+        grid-template-columns: 1fr;
       }
+    }
+  </style>
+</head>
 
-      .intro {
-        text-align: center;
-        margin-bottom: 28px;
-      }
+<body>
 
-      .intro h1 {
-        margin-bottom: 12px;
-        font-size: 25px;
-      }
+  <header class="topbar">
+    ☎ &nbsp; Fictional Gateway Support
+  </header>
 
-      .intro p {
-        color: #555;
-        line-height: 1.5;
-      }
+  <div class="page">
 
-      .buttons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin: 25px 0 35px;
-      }
+    <aside class="sidebar">
 
-      button,
-      .button {
-        border-radius: 5px;
-        padding: 13px 28px;
-        font-size: 16px;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-      }
-
-      .signin {
-        background: white;
-        border: 1px solid #1769e0;
-        color: #1769e0;
-      }
-
-      .create {
-        background: #1769e0;
-        border: 1px solid #1769e0;
-        color: white;
-      }
-
-      .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 22px;
-      }
-
-      .field {
-        display: flex;
-        flex-direction: column;
-      }
-
-      label {
-        font-weight: 600;
-        margin-bottom: 8px;
-      }
-
-      input,
-      select {
-        width: 100%;
-        padding: 13px;
-        border: 1px solid #c9d0d8;
-        border-radius: 5px;
-        font-size: 15px;
-      }
-
-      .full {
-        grid-column: 1 / -1;
-      }
-
-      .notice {
-        margin-top: 25px;
-        padding: 14px;
-        background: #f1f4f8;
-        border-radius: 5px;
-        color: #555;
-        font-size: 13px;
-        text-align: center;
-      }
-
-      .submit {
-        width: 100%;
-        margin-top: 25px;
-        background: #167c86;
-        color: white;
-        border: none;
-        font-weight: 600;
-      }
-
-      @media (max-width: 650px) {
-        .card {
-          padding: 25px 20px;
-        }
-
-        .form-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .full {
-          grid-column: auto;
-        }
-
-        .buttons {
-          flex-direction: column;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <header>
-      <div>
-        <div class="logo">{portalName}</div>
-        <div class="fictional">Fictional account portal</div>
+      <div class="brand">
+        <div class="brand-name">GATEWAY</div>
+        <div class="brand-subtitle">ACCOUNT PORTAL</div>
       </div>
-    </header>
 
-    <main>
-      <div class="card">
-        <div class="intro">
-          <h1>Welcome to the Gateway Account Portal</h1>
-          <p>
-            This is a fictional account portal for demonstration purposes.
-          </p>
-        </div>
+      <div class="menu-heading">MENU</div>
 
-        <div class="buttons">
-          <a class="button signin" href="/dashboard">Sign in</a>
-          <a class="button create" href="#create-account">
-            Create an account
-          </a>
-        </div>
+      <nav class="menu">
+        <a href="/dashboard" class="active">
+          <span class="icon">▣</span>
+          Dashboard
+        </a>
 
-        <section id="create-account">
-          <div class="form-grid">
-            <div class="field">
-              <label for="name">Full Name</label>
-              <input id="name" type="text" placeholder="Your name" />
-            </div>
+        <a href="#">
+          <span class="icon">▤</span>
+          Deposit
+        </a>
 
-            <div class="field">
-              <label for="email">Email Address</label>
-              <input id="email" type="email" placeholder="you@example.com" />
-            </div>
+        <a href="#">
+          <span class="icon">▣</span>
+          Withdraw
+        </a>
 
-            <div class="field">
-              <label for="country">Country</label>
-              <select id="country">
-                <option>United States</option>
-                <option>Canada</option>
-                <option>United Kingdom</option>
-                <option>India</option>
-                <option>Other</option>
-              </select>
-            </div>
+        <a href="#">
+          <span class="icon">⇄</span>
+          Transfer
+        </a>
 
-            <div class="field">
-              <label for="mobile">Mobile</label>
-              <input id="mobile" type="tel" placeholder="Phone number" />
-            </div>
+        <a href="#">
+          <span class="icon">◌</span>
+          Transactions
+        </a>
 
-            <div class="field">
-              <label for="password">Password</label>
-              <input id="password" type="password" placeholder="At least 6 characters" />
-            </div>
+        <a href="#">
+          <span class="icon">▱</span>
+          Support Ticket
+        </a>
 
-            <div class="field">
-              <label for="confirm">Confirm Password</label>
-              <input id="confirm" type="password" placeholder="Re-enter password" />
-            </div>
+        <a href="#">
+          <span class="icon">⚙</span>
+          Settings
+        </a>
+      </nav>
+
+      <div class="logout">
+        <a href="/">↪ &nbsp; Log Out</a>
+      </div>
+
+    </aside>
+
+    <main class="content">
+
+      <section class="account-row">
+
+        <div>
+          <div>
+            <strong>Account No:</strong>
+            {account.number}
+            &nbsp; | &nbsp;
+            <strong>ID:</strong>
+            {account.id}
           </div>
 
-          <div class="notice">
-            No government identification or sensitive identity information is
-            required for this fictional portal.
+          <div>
+            <strong>Name:</strong>
+            {account.name}
+            &nbsp; | &nbsp;
+            <strong>Case ID:</strong>
+            {account.caseId}
+          </div>
+        </div>
+
+        <div class="security">
+          Portal Security:
+          <span class="on">ON</span>
+          <br />
+
+          Secure Connection:
+          <span class="on">ON</span>
+        </div>
+
+      </section>
+
+      <h1>Dashboard</h1>
+
+      <section class="summary">
+
+        <div class="summary-item">
+          <div class="summary-label">Balance</div>
+          <div class="summary-value">{account.balance}</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Pending Deposits</div>
+          <div class="summary-value">{account.pendingDeposits}</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Pending Withdrawals</div>
+          <div class="summary-value">{account.pendingWithdrawals}</div>
+        </div>
+
+        <div class="summary-item">
+          <div class="summary-label">Today Transactions</div>
+          <div class="summary-value">{account.transactions}</div>
+        </div>
+
+      </section>
+
+      <section class="tables">
+
+        <div class="table-card">
+
+          <div class="table-heading">
+            Latest Credits
           </div>
 
-          <a class="button submit" href="/dashboard">
-            Create Account
-          </a>
-        </section>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Txn</th>
+                <th>Source</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="5" class="empty">
+                  No credits yet.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="table-card">
+
+          <div class="table-heading">
+            Latest Debits
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Txn</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="4" class="empty">
+                  No debits yet.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </section>
+
+      <div class="footer">
+        FRS Account Portal
       </div>
+
     </main>
-  </body>
+
+  </div>
+
+  <div class="fictional">
+    
+  </div>
+
+</body>
 </html>
