@@ -226,12 +226,8 @@
     </div>
 
   </main>
-
-  <script>
-    const storedAccount = localStorage.getItem("account");
-<script>
+ <script>
   const storedAccount = localStorage.getItem("account");
-
   const account = storedAccount
     ? JSON.parse(storedAccount)
     : {
@@ -241,7 +237,6 @@
         mobile: "000-000-0000",
         accountNumber: "AC-00000000"
       };
-
   document.getElementById("userName").textContent =
     account.name;
 
@@ -264,31 +259,6 @@
     localStorage.removeItem("account");
     window.location.href = "/";
   });
-</script>
-      document.getElementById("userName").textContent =
-        account.name || "User";
-
-      document.getElementById("name").textContent =
-        account.name || "---";
-
-      document.getElementById("email").textContent =
-        account.email || "---";
-
-      document.getElementById("country").textContent =
-        account.country || "---";
-
-      document.getElementById("mobile").textContent =
-        account.mobile || "---";
-
-      document.getElementById("accountNumber").textContent =
-        account.accountNumber || "---";
-    }
-
-    document.getElementById("logout").addEventListener("click", () => {
-      localStorage.removeItem("account");
-      window.location.href = "/";
-    });
-  </script>
 
 </body>
 </html>
