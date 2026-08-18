@@ -1,45 +1,52 @@
 <script>
   const form = document.getElementById("registrationForm");
 
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const country = document.getElementById("country").value;
-    const mobile = document.getElementById("mobile").value.trim();
+      const name = document.getElementById("name")?.value.trim();
+      const email = document.getElementById("email")?.value.trim();
+      const country = document.getElementById("country")?.value;
+      const mobile = document.getElementById("mobile")?.value.trim();
 
-    const password = document.getElementById("password").value;
-    const confirm = document.getElementById("confirmPassword").value;
+      const password = document.getElementById("password")?.value;
+      const confirmPassword =
+        document.getElementById("confirmPassword")?.value;
 
-    if (password !== confirm) {
-      alert("Passwords do not match.");
-      return;
-    }
+      if (!name || !email) {
+        alert("Please enter your name and email.");
+        return;
+      }
 
-    if (password.length < 8) {
-      alert("Password must contain at least 8 characters.");
-      return;
-    }
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
 
-    // Generate a fictional account ID
-    const accountNumber =
-      "AC-" +
-      Math.floor(10000000 + Math.random() * 90000000);
+      if (password.length < 8) {
+        alert("Password must contain at least 8 characters.");
+        return;
+      }
 
-    const account = {
-      name,
-      email,
-      country,
-      mobile,
-      accountNumber
-    };
+      const accountNumber =
+        "AC-" + Math.floor(10000000 + Math.random() * 90000000);
 
-    localStorage.setItem(
-      "account",
-      JSON.stringify(account)
-    );
+      const account = {
+        name: name,
+        email: email,
+        country: country,
+        mobile: mobile,
+        accountNumber: accountNumber
+      };
 
-    window.location.href = "/dashboard";
-  });
+      localStorage.setItem(
+        "account",
+        JSON.stringify(account)
+      );
+
+      // Go directly to the dashboard
+      window.location.href = "/dashboard";
+    });
+  }
 </script>
