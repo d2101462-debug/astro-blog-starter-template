@@ -1,5 +1,5 @@
 ---
-const title = "Account Dashboard";
+const title = "Gateway Account Portal";
 ---
 
 <html lang="en">
@@ -9,62 +9,417 @@ const title = "Account Dashboard";
   <title>{title}</title>
 
   <style>
+    :root {
+      font-family: Inter, Arial, sans-serif;
+      color: #172033;
+      background: #f4f7fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
+      background: #f4f7fb;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #102a43;
+      color: white;
+      padding: 26px 18px;
+      position: fixed;
+      inset: 0 auto 0 0;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      padding: 0 12px 30px;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 400;
+      opacity: .7;
+    }
+
+    nav {
+      margin-top: 25px;
+    }
+
+    nav a {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 6px;
+      color: #dce8f5;
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 14px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: #1d496d;
+      color: white;
+    }
+
+    .logout {
+      position: absolute;
+      bottom: 25px;
+      left: 30px;
+      color: #dce8f5;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* Main */
+    .main {
+      margin-left: 250px;
+      width: calc(100% - 250px);
     }
 
     header {
-      background: #123b63;
-      color: white;
-      padding: 20px 30px;
+      height: 76px;
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #dbeafe;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #174a73;
     }
 
     main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
+      padding: 35px;
+      max-width: 1400px;
+    }
+
+    .welcome {
+      margin-bottom: 28px;
+    }
+
+    .welcome h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .welcome p {
+      color: #64748b;
+      margin-top: 7px;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 25px;
     }
 
     .card {
       background: white;
-      padding: 30px;
+      border: 1px solid #e3e8ef;
       border-radius: 12px;
-      box-shadow: 0 3px 15px rgba(0,0,0,.1);
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(15,23,42,.04);
     }
 
-    .notice {
-      margin-top: 20px;
-      padding: 15px;
-      background: #f1f1f1;
+    .card-label {
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .amount {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -.5px;
+    }
+
+    .positive {
+      margin-top: 8px;
+      color: #16724a;
       font-size: 13px;
     }
 
-    a {
-      display: inline-block;
-      margin-top: 20px;
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 22px;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 17px;
+    }
+
+    /* Transactions */
+    .transaction {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .transaction:last-child {
+      border-bottom: 0;
+    }
+
+    .transaction-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .transaction-date {
+      color: #8995a5;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .transaction-amount {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .credit {
+      color: #16724a;
+    }
+
+    .debit {
+      color: #334155;
+    }
+
+    /* Account details */
+    .detail {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid #edf0f4;
+      font-size: 13px;
+    }
+
+    .detail span:first-child {
+      color: #64748b;
+    }
+
+    .notice {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: #fff8e6;
+      border: 1px solid #f1d58a;
+      border-radius: 8px;
+      color: #6b5415;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 210px;
+      }
+
+      .main {
+        margin-left: 210px;
+        width: calc(100% - 210px);
+      }
+
+      .cards,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      header {
+        padding: 0 18px;
+      }
+
+      main {
+        padding: 22px 16px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>Account Dashboard</h1>
-  </header>
+  <div class="layout">
 
-  <main>
-    <div class="card">
-      <h2>Welcome</h2>
-      <p>Your fictional account portal dashboard.</p>
-
-      <div class="notice">
-        Fictional demonstration only. Not connected to any government
-        agency, bank, or financial institution.
+    <aside class="sidebar">
+      <div class="brand">
+        Gateway Portal
+        <small>Account Services</small>
       </div>
 
-      <a href="/">Return to Home</a>
+      <nav>
+        <a href="/dashboard" class="active">Overview</a>
+        <a href="/dashboard">Account</a>
+        <a href="/dashboard">Activity</a>
+        <a href="/dashboard">Statements</a>
+        <a href="/dashboard">Settings</a>
+      </nav>
+
+      <a class="logout" href="/">Sign out</a>
+    </aside>
+
+    <div class="main">
+
+      <header>
+        <div class="header-title">Account Overview</div>
+
+        <div class="profile">
+          <div>
+            <strong>Account Holder</strong>
+          </div>
+          <div class="avatar">A</div>
+        </div>
+      </header>
+
+      <main>
+
+        <section class="welcome">
+          <h1>Welcome back</h1>
+          <p>Here's an overview of your account activity.</p>
+        </section>
+
+        <section class="cards">
+
+          <div class="card">
+            <div class="card-label">Current Balance</div>
+            <div class="amount">$25,000.00</div>
+            <div class="positive">Account balance</div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">Available Funds</div>
+            <div class="amount">$25,000.00</div>
+            <div class="positive">Available</div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">Account Status</div>
+            <div class="amount" style="font-size:24px;">Active</div>
+            <div class="positive">Account in good standing</div>
+          </div>
+
+        </section>
+
+        <section class="content-grid">
+
+          <div class="card">
+            <h2 class="section-title">Recent Activity</h2>
+
+            <div class="transaction">
+              <div>
+                <div class="transaction-name">Account Credit</div>
+                <div class="transaction-date">August 18, 2026</div>
+              </div>
+              <div class="transaction-amount credit">+$2,500.00</div>
+            </div>
+
+            <div class="transaction">
+              <div>
+                <div class="transaction-name">Account Adjustment</div>
+                <div class="transaction-date">August 16, 2026</div>
+              </div>
+              <div class="transaction-amount debit">-$350.00</div>
+            </div>
+
+            <div class="transaction">
+              <div>
+                <div class="transaction-name">Account Credit</div>
+                <div class="transaction-date">August 12, 2026</div>
+              </div>
+              <div class="transaction-amount credit">+$1,200.00</div>
+            </div>
+
+            <div class="transaction">
+              <div>
+                <div class="transaction-name">Service Adjustment</div>
+                <div class="transaction-date">August 10, 2026</div>
+              </div>
+              <div class="transaction-amount debit">-$125.00</div>
+            </div>
+
+          </div>
+
+          <div class="card">
+            <h2 class="section-title">Account Details</h2>
+
+            <div class="detail">
+              <span>Account Type</span>
+              <strong>Standard</strong>
+            </div>
+
+            <div class="detail">
+              <span>Status</span>
+              <strong>Active</strong>
+            </div>
+
+            <div class="detail">
+              <span>Member Since</span>
+              <strong>2026</strong>
+            </div>
+
+            <div class="detail">
+              <span>Account ID</span>
+              <strong>•••• 4821</strong>
+            </div>
+
+          </div>
+
+        </section>
+
+        <div class="notice">
+          <strong>Fictional demonstration portal.</strong>
+          This dashboard is for demonstration purposes only and is not
+          connected to the Federal Reserve, any government agency, bank,
+          or financial institution.
+        </div>
+
+      </main>
     </div>
-  </main>
+  </div>
 </body>
 </html>
