@@ -1,24 +1,11 @@
 ---
-const portalName = "FRS Account Portal";
-
-const account = {
-  number: "xxxx-600951",
-  id: "****5608",
-  name: "Daniel Smith",
-  caseId: "ms-001",
-  balance: "$25,000.00",
-  pendingDeposits: "0",
-  pendingWithdrawals: "0",
-  transactions: "0",
-};
 ---
 
-<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{portalName}</title>
+  <title>Account Dashboard</title>
 
   <style>
     * {
@@ -28,280 +15,147 @@ const account = {
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f7f8fa;
-      color: #17233f;
+      background: #f4f6fb;
+      color: #11143b;
     }
 
-    .topbar {
-      height: 58px;
-      background: #11184d;
-      color: white;
+    .header {
+      background: white;
+      border-bottom: 1px solid #ddd;
+      padding: 22px 45px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      font-size: 15px;
-      font-weight: 600;
     }
 
-    .page {
-      display: flex;
-      min-height: calc(100vh - 58px);
-    }
-
-    /* SIDEBAR */
-
-    .sidebar {
-      width: 240px;
-      background: #fff;
-      border-right: 1px solid #d9dee7;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-    }
-
-    .brand {
-      height: 90px;
-      padding: 20px;
-      border-bottom: 1px solid #d9dee7;
-    }
-
-    .brand-name {
-      font-size: 20px;
+    .logo {
+      font-size: 25px;
       font-weight: 700;
-      color: #1c2864;
-    }
-
-    .brand-subtitle {
-      margin-top: 5px;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      color: #737d91;
-    }
-
-    .menu-heading {
-      font-size: 11px;
-      font-weight: 700;
-      color: #70798b;
-      padding: 15px 20px 8px;
-    }
-
-    .menu {
-      padding: 0 10px;
-    }
-
-    .menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      height: 43px;
-      padding: 0 14px;
-      margin-bottom: 3px;
-      border-radius: 5px;
-      color: #202a43;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .menu a:hover,
-    .menu a.active {
-      background: #252c78;
-      color: white;
-    }
-
-    .icon {
-      width: 18px;
-      text-align: center;
+      color: #3436bd;
     }
 
     .logout {
-      margin-top: auto;
-      border-top: 1px solid #d9dee7;
-      padding: 20px;
+      border: 1px solid #3436bd;
+      background: white;
+      color: #3436bd;
+      padding: 10px 22px;
+      border-radius: 7px;
+      cursor: pointer;
     }
 
-    .logout a {
-      color: #4f5a70;
-      font-size: 13px;
-      text-decoration: underline;
+    .container {
+      max-width: 1050px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    /* MAIN */
-
-    .content {
-      flex: 1;
-      padding: 28px 28px 40px;
-      min-width: 0;
+    .welcome {
+      margin-bottom: 25px;
     }
 
-    .account-row {
+    .welcome h1 {
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #68708b;
+    }
+
+    .account-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.07);
+      margin-bottom: 25px;
+    }
+
+    .account-title {
       display: flex;
       justify-content: space-between;
-      gap: 30px;
-      margin-bottom: 24px;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .account-number {
+      font-size: 17px;
+      color: #68708b;
+    }
+
+    .account-number strong {
+      color: #11143b;
+    }
+
+    .status {
+      background: #e8f7ee;
+      color: #168344;
+      padding: 8px 15px;
+      border-radius: 20px;
       font-size: 14px;
-      line-height: 1.9;
+      font-weight: 600;
     }
 
-    .account-row strong {
-      color: #18265d;
+    .balance {
+      background: #f3f4ff;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 25px;
     }
 
-    .security {
-      text-align: right;
-      font-size: 13px;
-      line-height: 2;
+    .balance-label {
+      color: #68708b;
+      margin-bottom: 8px;
     }
 
-    .on {
-      display: inline-block;
-      min-width: 37px;
-      text-align: center;
-      padding: 0 8px;
-      border-radius: 12px;
-      background: #17844d;
-      color: white;
-      font-size: 11px;
+    .balance-value {
+      font-size: 34px;
       font-weight: 700;
+      color: #3436bd;
     }
 
-    h1 {
-      margin: 0 0 30px;
-      font-size: 29px;
-      font-weight: 500;
-      color: #17213e;
-    }
-
-    /* SUMMARY */
-
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
-      margin-bottom: 24px;
-    }
-
-    .summary-item {
-      min-height: 92px;
-      padding: 8px 12px 15px;
-      border-bottom: 1px solid #dce1e8;
-    }
-
-    .summary-label {
-      color: #53617b;
-      font-size: 13px;
-      margin-bottom: 9px;
-    }
-
-    .summary-value {
-      font-size: 29px;
-      font-weight: 400;
-      color: #273451;
-    }
-
-    /* TABLES */
-
-    .tables {
+    .details {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 20px;
     }
 
-    .table-card {
-      background: white;
-      border: 1px solid #d8dee8;
-      border-radius: 4px;
-      overflow: hidden;
+    .detail {
+      border: 1px solid #e0e3ec;
+      border-radius: 8px;
+      padding: 17px;
     }
 
-    .table-heading {
-      height: 48px;
-      display: flex;
-      align-items: center;
-      padding: 0 14px;
-      font-weight: 700;
+    .detail-label {
       font-size: 14px;
-      border-bottom: 1px solid #d8dee8;
+      color: #747b93;
+      margin-bottom: 7px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .detail-value {
+      font-size: 17px;
+      font-weight: 600;
     }
 
-    th {
-      padding: 11px 8px;
-      text-align: left;
-      font-size: 12px;
-      color: #303b54;
-      border-bottom: 1px solid #e0e4eb;
-      white-space: nowrap;
-    }
-
-    td {
-      padding: 20px 8px;
-      font-size: 13px;
-      color: #667085;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 28px;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 48px;
-      color: #69748a;
-      font-size: 12px;
-    }
-
-    .fictional {
-      position: fixed;
-      right: 14px;
-      bottom: 14px;
-      padding: 6px 10px;
-      background: #a82424;
-      color: white;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: bold;
-      z-index: 50;
-    }
-
-    @media (max-width: 950px) {
-      .sidebar {
-        width: 205px;
-      }
-
-      .summary {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .tables {
-        grid-template-columns: 1fr;
-      }
+    .notice {
+      background: #fff;
+      border-left: 4px solid #3436bd;
+      padding: 18px;
+      color: #5d647c;
+      border-radius: 5px;
     }
 
     @media (max-width: 650px) {
-      .sidebar {
-        display: none;
-      }
-
-      .content {
-        padding: 20px;
-      }
-
-      .account-row {
-        display: block;
-      }
-
-      .security {
-        text-align: left;
-        margin-top: 12px;
-      }
-
-      .summary {
+      .details {
         grid-template-columns: 1fr;
+      }
+
+      .header {
+        padding: 18px 20px;
+      }
+
+      .account-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
       }
     }
   </style>
@@ -309,193 +163,109 @@ const account = {
 
 <body>
 
-  <header class="topbar">
-    ☎ &nbsp; Fictional Gateway Support
+  <header class="header">
+    <div class="logo">Account Portal</div>
+
+    <button class="logout" id="logout">
+      Sign out
+    </button>
   </header>
 
-  <div class="page">
+  <main class="container">
 
-    <aside class="sidebar">
+    <div class="welcome">
+      <h1>Welcome, <span id="userName">User</span></h1>
+      <p>Your account information is shown below.</p>
+    </div>
 
-      <div class="brand">
-        <div class="brand-name">GATEWAY</div>
-        <div class="brand-subtitle">ACCOUNT PORTAL</div>
+    <section class="account-card">
+
+      <div class="account-title">
+        <div class="account-number">
+          Account ID:
+          <strong id="accountNumber">---</strong>
+        </div>
+
+        <div class="status">
+          Active
+        </div>
       </div>
 
-      <div class="menu-heading">MENU</div>
+      <div class="balance">
+        <div class="balance-label">
+          Account Balance
+        </div>
 
-      <nav class="menu">
-        <a href="/dashboard" class="active">
-          <span class="icon">▣</span>
-          Dashboard
-        </a>
-
-        <a href="#">
-          <span class="icon">▤</span>
-          Deposit
-        </a>
-
-        <a href="#">
-          <span class="icon">▣</span>
-          Withdraw
-        </a>
-
-        <a href="#">
-          <span class="icon">⇄</span>
-          Transfer
-        </a>
-
-        <a href="#">
-          <span class="icon">◌</span>
-          Transactions
-        </a>
-
-        <a href="#">
-          <span class="icon">▱</span>
-          Support Ticket
-        </a>
-
-        <a href="#">
-          <span class="icon">⚙</span>
-          Settings
-        </a>
-      </nav>
-
-      <div class="logout">
-        <a href="/">↪ &nbsp; Log Out</a>
+        <div class="balance-value">
+          $0.00
+        </div>
       </div>
 
-    </aside>
+      <div class="details">
 
-    <main class="content">
-
-      <section class="account-row">
-
-        <div>
-          <div>
-            <strong>Account No:</strong>
-            {account.number}
-            &nbsp; | &nbsp;
-            <strong>ID:</strong>
-            {account.id}
-          </div>
-
-          <div>
-            <strong>Name:</strong>
-            {account.name}
-            &nbsp; | &nbsp;
-            <strong>Case ID:</strong>
-            {account.caseId}
-          </div>
+        <div class="detail">
+          <div class="detail-label">Full Name</div>
+          <div class="detail-value" id="name">---</div>
         </div>
 
-        <div class="security">
-          Portal Security:
-          <span class="on">ON</span>
-          <br />
-
-          Secure Connection:
-          <span class="on">ON</span>
+        <div class="detail">
+          <div class="detail-label">Email Address</div>
+          <div class="detail-value" id="email">---</div>
         </div>
 
-      </section>
-
-      <h1>Dashboard</h1>
-
-      <section class="summary">
-
-        <div class="summary-item">
-          <div class="summary-label">Balance</div>
-          <div class="summary-value">{account.balance}</div>
+        <div class="detail">
+          <div class="detail-label">Country</div>
+          <div class="detail-value" id="country">---</div>
         </div>
 
-        <div class="summary-item">
-          <div class="summary-label">Pending Deposits</div>
-          <div class="summary-value">{account.pendingDeposits}</div>
+        <div class="detail">
+          <div class="detail-label">Mobile</div>
+          <div class="detail-value" id="mobile">---</div>
         </div>
 
-        <div class="summary-item">
-          <div class="summary-label">Pending Withdrawals</div>
-          <div class="summary-value">{account.pendingWithdrawals}</div>
-        </div>
-
-        <div class="summary-item">
-          <div class="summary-label">Today Transactions</div>
-          <div class="summary-value">{account.transactions}</div>
-        </div>
-
-      </section>
-
-      <section class="tables">
-
-        <div class="table-card">
-
-          <div class="table-heading">
-            Latest Credits
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Txn</th>
-                <th>Source</th>
-                <th>Status</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td colspan="5" class="empty">
-                  No credits yet.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-
-        <div class="table-card">
-
-          <div class="table-heading">
-            Latest Debits
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Txn</th>
-                <th>Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td colspan="4" class="empty">
-                  No debits yet.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-
-      </section>
-
-      <div class="footer">
-        FRS Account Portal
       </div>
 
-    </main>
+    </section>
 
-  </div>
+    <div class="notice">
+      This is a fictional account portal. No real financial account,
+      funds, or government-issued identification is represented.
+    </div>
 
-  <div class="fictional">
-    
-  </div>
+  </main>
+
+  <script>
+    const account = localStorage.getItem("account");
+
+    if (!account) {
+      window.location.href = "/";
+    } else {
+      const data = JSON.parse(account);
+
+      document.getElementById("userName").textContent =
+        data.name || "User";
+
+      document.getElementById("name").textContent =
+        data.name || "---";
+
+      document.getElementById("email").textContent =
+        data.email || "---";
+
+      document.getElementById("country").textContent =
+        data.country || "---";
+
+      document.getElementById("mobile").textContent =
+        data.mobile || "---";
+
+      document.getElementById("accountNumber").textContent =
+        data.accountNumber || "---";
+    }
+
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.removeItem("account");
+      window.location.href = "/";
+    });
+  </script>
 
 </body>
 </html>
