@@ -16,17 +16,21 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f3f6fa;
+      background: #f4f6fb;
       color: #172033;
+    }
+
+    .page {
+      min-height: 100vh;
     }
 
     header {
       background: #ffffff;
       border-bottom: 1px solid #d9dee8;
-      padding: 20px 7%;
+      padding: 18px 7%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
     .logo {
@@ -35,87 +39,82 @@
       color: #3436bd;
     }
 
-    .logo span {
+    .logo small {
       display: block;
-      font-size: 12px;
+      margin-top: 4px;
       color: #667085;
+      font-size: 12px;
       font-weight: 400;
-      margin-top: 3px;
     }
 
     .support {
+      color: #3436bd;
       font-size: 14px;
-      color: #4b5565;
+      font-weight: 600;
     }
 
     main {
-      max-width: 900px;
-      margin: 35px auto;
-      padding: 0 20px;
+      max-width: 850px;
+      margin: 45px auto;
+      padding: 0 25px;
     }
 
     .intro {
       text-align: center;
-      margin-bottom: 25px;
     }
 
     .intro h1 {
-      margin-bottom: 10px;
-      font-size: 30px;
+      font-size: 27px;
+      margin: 0 0 10px;
     }
 
     .intro p {
-      color: #5f6b7a;
       max-width: 650px;
-      margin: auto;
+      margin: 0 auto;
+      font-size: 16px;
       line-height: 1.5;
+      font-weight: 600;
     }
 
     .buttons {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin: 25px 0;
+      gap: 18px;
+      margin: 28px 0 35px;
     }
 
-    .button {
-      padding: 12px 30px;
-      border-radius: 7px;
+    .top-button {
+      padding: 13px 40px;
+      border-radius: 6px;
       font-size: 15px;
       cursor: pointer;
       text-decoration: none;
     }
 
-    .signin {
-      border: 1px solid #3436bd;
+    .sign-in {
       background: white;
       color: #3436bd;
+      border: 1px solid #3436bd;
     }
 
     .create {
-      border: 1px solid #3436bd;
       background: #3436bd;
       color: white;
+      border: 1px solid #3436bd;
     }
 
-    .card {
+    .form-card {
       background: white;
-      border: 1px solid #dce1e8;
-      border-radius: 10px;
       padding: 30px;
-      box-shadow: 0 3px 15px rgba(20, 30, 50, 0.06);
-    }
-
-    .card h2 {
-      margin-top: 0;
-      margin-bottom: 25px;
-      font-size: 23px;
+      border-radius: 8px;
+      border: 1px solid #dce1e8;
     }
 
     form {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      column-gap: 35px;
+      row-gap: 20px;
     }
 
     .field {
@@ -128,40 +127,42 @@
     }
 
     label {
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 15px;
       margin-bottom: 8px;
-      font-size: 14px;
     }
 
     input,
     select {
       width: 100%;
-      padding: 13px;
+      height: 48px;
       border: 1px solid #cbd2dc;
       border-radius: 6px;
+      padding: 0 14px;
       font-size: 15px;
-      outline: none;
+      color: #172033;
+      background: white;
     }
 
     input:focus,
     select:focus {
+      outline: none;
       border-color: #3436bd;
-      box-shadow: 0 0 0 2px rgba(52, 54, 189, 0.1);
+      box-shadow: 0 0 0 2px rgba(52, 54, 189, 0.12);
     }
 
-    .notice {
+    .hint {
       grid-column: 1 / -1;
       color: #667085;
       font-size: 13px;
-      line-height: 1.5;
-      margin-top: -5px;
+      margin-top: -3px;
     }
 
     .submit {
       grid-column: 1 / -1;
-      border: 0;
-      border-radius: 7px;
-      padding: 14px;
+      height: 50px;
+      border: none;
+      border-radius: 6px;
       background: #167f8c;
       color: white;
       font-size: 16px;
@@ -170,14 +171,14 @@
     }
 
     .submit:hover {
-      background: #126c77;
+      background: #126d77;
     }
 
     footer {
       text-align: center;
       color: #7a8493;
-      font-size: 13px;
-      margin: 30px 0;
+      font-size: 12px;
+      margin: 25px 0;
     }
 
     @media (max-width: 700px) {
@@ -190,7 +191,16 @@
       }
 
       main {
-        margin-top: 20px;
+        margin: 25px auto;
+        padding: 0 15px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .top-button {
+        text-align: center;
       }
 
       form {
@@ -198,160 +208,151 @@
       }
 
       .full,
-      .notice,
+      .hint,
       .submit {
         grid-column: auto;
       }
 
-      .buttons {
-        flex-direction: column;
-      }
-
-      .button {
-        text-align: center;
-      }
-
-      .card {
-        padding: 22px;
+      .form-card {
+        padding: 20px;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="page">
 
-  <header>
-    <div class="logo">
-      Secure Account Portal
-      <span>Online Financial Services</span>
-    </div>
-
-    <div class="support">
-      Support: 1-800-555-0147
-    </div>
-  </header>
-
-  <main>
-
-    <section class="intro">
-      <h1>Create Your Account</h1>
-
-      <p>
-        Register for your secure online account. After completing
-        registration, you will be taken to your account dashboard.
-      </p>
-
-      <div class="buttons">
-        <a class="button signin" href="/login">
-          Sign in
-        </a>
-
-        <a class="button create" href="#registration">
-          Create an account
-        </a>
+    <header>
+      <div class="logo">
+        Secure Account Portal
+        <small>Online Financial Services</small>
       </div>
-    </section>
 
-    <section class="card" id="registration">
+      <div class="support">
+        Support: 1-800-555-0147
+      </div>
+    </header>
 
-      <h2>Account Registration</h2>
+    <main>
 
-      <form id="registrationForm">
+      <section class="intro">
+        <h1>Create Your Secure Account</h1>
 
-        <div class="field">
-          <label for="name">Full Name</label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter your full name"
-            required
-          />
+        <p>
+          Create an account to access your secure online financial-service
+          portal.
+        </p>
+
+        <div class="buttons">
+          <a class="top-button sign-in" href="/login">
+            Sign in
+          </a>
+
+          <a class="top-button create" href="#registration">
+            Create an account
+          </a>
         </div>
+      </section>
 
-        <div class="field">
-          <label for="email">Email Address</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="name@example.com"
-            required
-          />
-        </div>
+      <section class="form-card" id="registration">
 
-        <div class="field">
-          <label for="country">Country</label>
+        <form id="registrationForm">
 
-          <select id="country" required>
-            <option value="">Select country</option>
-            <option value="United States">United States</option>
-            <option value="Canada">Canada</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="India">India</option>
-            <option value="Australia">Australia</option>
-          </select>
-        </div>
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
 
-        <div class="field">
-          <label for="mobile">Mobile</label>
-          <input
-            id="mobile"
-            type="tel"
-            placeholder="+1 555 000 0000"
-            required
-          />
-        </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="name@example.com"
+              required
+            />
+          </div>
 
-        <div class="field full">
-          <label for="address">Registered Address</label>
-          <input
-            id="address"
-            type="text"
-            placeholder="Enter your address"
-            required
-          />
-        </div>
+          <div class="field">
+            <label for="country">Country</label>
 
-        <div class="field">
-          <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            minlength="6"
-            placeholder="At least 6 characters"
-            required
-          />
-        </div>
+            <select id="country" required>
+              <option value="">Select country</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>United Kingdom</option>
+              <option>India</option>
+              <option>Australia</option>
+            </select>
+          </div>
 
-        <div class="field">
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            minlength="6"
-            placeholder="Re-enter password"
-            required
-          />
-        </div>
+          <div class="field">
+            <label for="mobile">Mobile</label>
+            <input
+              id="mobile"
+              type="tel"
+              placeholder="Enter mobile number"
+              required
+            />
+          </div>
 
-        <div class="notice">
-          Your registration information is used only for this fictional
-          account portal. Do not enter real Social Security numbers,
-          financial credentials, or other sensitive information.
-        </div>
+          <div class="field full">
+            <label for="address">Registered Address</label>
+            <input
+              id="address"
+              type="text"
+              placeholder="Enter your address"
+              required
+            />
+          </div>
 
-        <button class="submit" type="submit">
-          Create Account
-        </button>
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              minlength="6"
+              placeholder="At least 6 characters"
+              required
+            />
+          </div>
 
-      </form>
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              minlength="6"
+              placeholder="Re-enter password"
+              required
+            />
+          </div>
 
-    </section>
+          <div class="hint">
+            Account number will be generated automatically after registration.
+          </div>
 
-    <footer>
-      © 2026 Secure Account Portal · Fictional financial-service interface
-    </footer>
+          <button class="submit" type="submit">
+            Create Account
+          </button>
 
-  </main>
+        </form>
+
+      </section>
+
+      <footer>
+        Secure Account Portal · Fictional financial-service interface
+      </footer>
+
+    </main>
+
+  </div>
 
   <script>
     const form = document.getElementById("registrationForm");
@@ -359,21 +360,15 @@
     form?.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const nameInput = document.getElementById("name");
-      const emailInput = document.getElementById("email");
-      const countryInput = document.getElementById("country");
-      const mobileInput = document.getElementById("mobile");
-      const addressInput = document.getElementById("address");
-      const passwordInput = document.getElementById("password");
-      const confirmPasswordInput = document.getElementById("confirmPassword");
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const country = document.getElementById("country").value;
+      const mobile = document.getElementById("mobile").value.trim();
+      const address = document.getElementById("address").value.trim();
 
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const country = countryInput.value;
-      const mobile = mobileInput.value.trim();
-      const address = addressInput.value.trim();
-      const password = passwordInput.value;
-      const confirmPassword = confirmPasswordInput.value;
+      const password = document.getElementById("password").value;
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
 
       if (password !== confirmPassword) {
         alert("Passwords do not match.");
@@ -388,7 +383,10 @@
         address
       };
 
-      localStorage.setItem("account", JSON.stringify(account));
+      localStorage.setItem(
+        "account",
+        JSON.stringify(account)
+      );
 
       window.location.href = "/dashboard";
     });
