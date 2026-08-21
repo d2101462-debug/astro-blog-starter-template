@@ -1,375 +1,259 @@
 ---
-const countries = ["United States", "Canada", "United Kingdom", "India", "Australia"];
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create an Account</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Services — Sign In</title>
 
-  <body>
-    <main class="page">
-      <section class="card">
-
-        <!-- Fictional branding -->
-        <div class="brand">
-          <div class="logo">FG</div>
-
-          <h1>Fictional Gateway</h1>
-
-          <p>
-            Sign in securely or create your account to continue.
-          </p>
-
-          <span class="demo-label">FICTIONAL WEBSITE</span>
-        </div>
-
-        <!-- Top buttons -->
-        <div class="tabs">
-          <button type="button" class="sign-in">
-            Sign in
-          </button>
-
-          <button type="button" class="create-tab">
-            Create an account
-          </button>
-        </div>
-
-        <!-- Registration form -->
-        <form id="registrationForm">
-
-          <div class="form-grid">
-
-            <div class="field">
-              <label for="name">Full Name</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Example User"
-                autocomplete="name"
-                required
-              />
-            </div>
-
-            <div class="field">
-              <label for="email">Email Address</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="user@example.com"
-                autocomplete="email"
-                required
-              />
-            </div>
-
-            <div class="field">
-              <label for="reference">Reference ID</label>
-              <input
-                id="reference"
-                type="text"
-                placeholder="Example: FG-123456"
-              />
-            </div>
-
-            <div class="field">
-              <label for="country">Country</label>
-
-              <select id="country">
-                {countries.map((country) => (
-                  <option value={country}>{country}</option>
-                ))}
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="mobile">Mobile</label>
-              <input
-                id="mobile"
-                type="tel"
-                placeholder="000-000-0000"
-                autocomplete="tel"
-              />
-            </div>
-
-            <div class="field">
-              <label for="alternate">Alternate Mobile</label>
-              <input
-                id="alternate"
-                type="tel"
-                placeholder="000-000-0000"
-              />
-            </div>
-
-            <div class="field full">
-              <label for="address">Registered Address</label>
-              <input
-                id="address"
-                type="text"
-                placeholder="123 Example Street, Example City"
-                autocomplete="street-address"
-              />
-            </div>
-
-            <div class="field">
-              <label for="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="At least 6 characters"
-                minlength="6"
-                autocomplete="new-password"
-                required
-              />
-            </div>
-
-            <div class="field">
-              <label for="confirmPassword">Confirm Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                placeholder="Re-enter Password"
-                autocomplete="new-password"
-                required
-              />
-            </div>
-
-          </div>
-
-          <p class="information">
-            Account information will be generated after signup.
-            This fictional site does not request government identification
-            numbers.
-          </p>
-
-          <button class="submit" type="submit">
-            Create Account
-          </button>
-
-          <p id="message" class="message"></p>
-
-        </form>
-
-      </section>
-    </main>
-
-    <script>
-      const form = document.querySelector("#registrationForm");
-      const message = document.querySelector("#message");
-
-      form?.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        const password =
-          document.querySelector("#password")?.value;
-
-        const confirmPassword =
-          document.querySelector("#confirmPassword")?.value;
-
-        if (password !== confirmPassword) {
-          message.textContent = "Passwords do not match.";
-          message.className = "message error";
-          return;
-        }
-
-        message.textContent = "Account created successfully.";
-        message.className = "message success";
-      });
-    </script>
-  </body>
-</html>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f7fb;
-    color: #111827;
-  }
-
-  .page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 45px 20px;
-  }
-
-  .card {
-    width: 100%;
-    max-width: 820px;
-    background: #ffffff;
-    padding: 35px 45px 40px;
-    border-radius: 8px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-  }
-
-  .brand {
-    text-align: center;
-    margin-bottom: 25px;
-  }
-
-  .logo {
-    width: 58px;
-    height: 58px;
-    margin: 0 auto 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #2437c7;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-  }
-
-  .brand h1 {
-    margin: 0;
-    font-size: 25px;
-    color: #111827;
-  }
-
-  .brand p {
-    margin: 6px auto 10px;
-    max-width: 650px;
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .demo-label {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #475569;
-  }
-
-  .tabs {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 28px 0 38px;
-  }
-
-  .tabs button {
-    height: 53px;
-    padding: 0 42px;
-    border-radius: 7px;
-    font-size: 17px;
-    cursor: pointer;
-  }
-
-  .sign-in {
-    background: white;
-    color: #2437c7;
-    border: 1.5px solid #2437c7;
-  }
-
-  .create-tab {
-    background: #2437c7;
-    color: white;
-    border: 1.5px solid #2437c7;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px 28px;
-  }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .field.full {
-    grid-column: 1 / -1;
-  }
-
-  label {
-    margin-bottom: 8px;
-    font-size: 17px;
-    font-weight: 700;
-  }
-
-  input,
-  select {
-    width: 100%;
-    height: 53px;
-    padding: 0 17px;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    background: #fafcff;
-    color: #172554;
-    font-size: 16px;
-    outline: none;
-  }
-
-  input:focus,
-  select:focus {
-    border: 2px solid #60a5fa;
-    background: white;
-  }
-
-  .information {
-    margin: 24px 0 18px;
-    color: #64748b;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .submit {
-    width: 100%;
-    height: 53px;
-    border: none;
-    border-radius: 6px;
-    background: #159e9e;
-    color: white;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .submit:hover {
-    background: #128b8b;
-  }
-
-  .message {
-    text-align: center;
-    font-size: 14px;
-    margin: 15px 0 0;
-  }
-
-  .success {
-    color: #087f5b;
-  }
-
-  .error {
-    color: #c92a2a;
-  }
-
-  @media (max-width: 700px) {
-    .card {
-      padding: 25px 20px 30px;
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    .form-grid {
-      grid-template-columns: 1fr;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #172b4d;
     }
 
-    .field.full {
-      grid-column: auto;
+    .topbar {
+      background: #123b70;
+      color: white;
+      padding: 12px 6%;
+      font-size: 14px;
     }
 
-    .tabs button {
+    .header {
+      background: white;
+      border-bottom: 1px solid #d8dee8;
+      padding: 24px 7%;
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 35px auto;
       padding: 0 20px;
-      flex: 1;
     }
-  }
-</style>
+
+    .card {
+      background: white;
+      padding: 40px;
+      border: 1px solid #d8dee8;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .illustration {
+      height: 125px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #dbeafe;
+      border: 3px solid #2764a5;
+    }
+
+    .shield {
+      width: 60px;
+      height: 72px;
+      background: #2764a5;
+      clip-path: polygon(50% 0, 90% 15%, 85% 65%, 50% 100%, 15% 65%, 10% 15%);
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 12px;
+      color: #172b4d;
+    }
+
+    .notice {
+      font-size: 17px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tabs a {
+      padding: 12px 5px;
+      text-decoration: none;
+      color: #175a9c;
+      font-weight: 700;
+    }
+
+    .tabs .active {
+      border-bottom: 4px solid #175a9c;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 7px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #8a98a8;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+
+    .sample-note {
+      margin-top: 20px;
+      padding: 12px;
+      background: #eef5ff;
+      border-left: 4px solid #2764a5;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      border: 0;
+      border-radius: 4px;
+      background: #2764a5;
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4f83;
+    }
+
+    .footer {
+      text-align: center;
+      margin: 25px 0;
+      font-size: 13px;
+      color: #65758b;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px;
+      }
+
+      .header {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    Fictional Account Services
+  </div>
+
+  <div class="header">
+    Account Services
+  </div>
+
+  <main class="container">
+
+    <section class="card">
+
+      <div class="illustration">
+        <div class="circle"></div>
+        <div class="shield"></div>
+        <div class="circle"></div>
+      </div>
+
+      <h1>Sign in to your account</h1>
+
+      <p class="notice">
+        Sign in to access your Account Services dashboard.
+      </p>
+
+      <div class="tabs">
+        <a class="active" href="/login">Sign in</a>
+        <a href="/">Create an account</a>
+      </div>
+
+      <form id="loginForm">
+
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="name@example.com"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter your password"
+          required
+        />
+
+        <label style="font-weight: normal;">
+          <input
+            id="showPassword"
+            type="checkbox"
+            style="width:auto; margin-right:8px;"
+          />
+          Show password
+        </label>
+
+        <div class="sample-note">
+          This is a fictional sample application and is not affiliated
+          with any government or financial institution.
+        </div>
+
+        <button type="submit">
+          Sign in
+        </button>
+
+      </form>
+
+    </section>
+
+    <div class="footer">
+      Fictional Account Services
+    </div>
+
+  </main>
+
+  <script>
+    const password = document.getElementById("password");
+    const showPassword = document.getElementById("showPassword");
+    const form = document.getElementById("loginForm");
+
+    showPassword.addEventListener("change", () => {
+      password.type = showPassword.checked ? "text" : "password";
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      // UI-only sample navigation.
+      // No credentials are sent or stored.
+      window.location.href = "/dashboard";
+    });
+  </script>
+
+</body>
+</html>
