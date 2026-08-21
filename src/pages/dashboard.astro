@@ -6,191 +6,137 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Account Dashboard</title>
+  <title>Sign In</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: #f4f7fb;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 520px;
+      padding: 35px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 25px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      margin-top: 0;
       color: #172033;
     }
 
-    .dashboard {
-      max-width: 950px;
-      margin: 40px auto;
-      padding: 25px;
-    }
-
-    header {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      margin: 0;
-    }
-
-    header p {
-      margin-bottom: 0;
-      color: #64748b;
-    }
-
-    .logout {
-      padding: 11px 20px;
-      border-radius: 7px;
-      background: #2437c7;
-      color: white;
-      text-decoration: none;
+    label {
+      display: block;
+      margin: 20px 0 8px;
       font-weight: bold;
     }
 
-    .welcome {
+    input {
+      width: 100%;
+      height: 52px;
+      padding: 0 15px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      height: 52px;
       margin-top: 25px;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
+      border: 0;
+      border-radius: 7px;
+      background: #2437c7;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .detail {
-      background: white;
-      padding: 22px;
-      border-radius: 10px;
-    }
-
-    .detail span {
+    .back {
       display: block;
-      color: #64748b;
-      margin-bottom: 8px;
-    }
-
-    .detail strong {
-      font-size: 18px;
-      word-break: break-word;
+      margin-top: 20px;
+      text-align: center;
+      color: #2437c7;
+      text-decoration: none;
     }
 
     .notice {
-      margin-top: 25px;
-      text-align: center;
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    @media (max-width: 650px) {
-      .details {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        gap: 20px;
-      }
+      margin-top: 20px;
+      padding: 12px;
+      background: #eef4ff;
+      border-left: 4px solid #2437c7;
+      color: #475569;
+      font-size: 13px;
     }
   </style>
 </head>
 
 <body>
 
-  <main class="FRS Gateway">
+  <main class="card">
 
-    <header>
-      <div>
-        <h1>FRS Gateway</h1>
-        <p>Account Dashboard</p>
-      </div>
+    <h1>Sign In</h1>
 
-      <a class="logout" href="/login">
-        Logout
-      </a>
-    </header>
+    <p>Sign in to access your FRS Dashboard.</p>
 
-    <section class="welcome">
-      <h2>Welcome, <span id="name">User</span></h2>
-      <p>Your account dashboard is ready.</p>
-    </section>
+    <form id="loginForm">
 
-    <section class="details">
+      <label for="email">
+        Email Address
+      </label>
 
-      <div class="detail">
-        <span>Email Address</span>
-        <strong id="email">—</strong>
-      </div>
+      <input
+        id="email"
+        type="email"
+        placeholder="user@example.com"
+        required
+      />
 
-      <div class="detail">
-        <span>SSN/span>
-        <strong id="reference">—</strong>
-      </div>
+      <label for="password">
+        Password
+      </label>
 
-      <div class="detail">
-        <span>Country</span>
-        <strong id="country">—</strong>
-      </div>
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        required
+      />
 
-      <div class="detail">
-        <span>Mobile</span>
-        <strong id="mobile">—</strong>
-      </div>
+      <button type="submit">
+        Sign In
+      </button>
 
-      <div class="detail">
-        <span>Alternate Mobile</span>
-        <strong id="alternate">—</strong>
-      </div>
+    </form>
 
-      <div class="detail">
-        <span>Address</span>
-        <strong id="address">—</strong>
-      </div>
-
-    </section>
+    <a class="back" href="/">
+      Create an account
+    </a>
 
     <div class="notice">
-      FRS Gareway
+     FRS Gateway
     </div>
 
   </main>
 
   <script>
-    const stored =
-      sessionStorage.getItem("FRS Account");
+    const form = document.querySelector("#loginForm");
 
-    if (stored) {
-      const account = JSON.parse(stored);
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-      document.querySelector("#name").textContent =
-        account.fullName || "User";
-
-      document.querySelector("#email").textContent =
-        account.email || "—";
-
-      document.querySelector("#reference").textContent =
-        account.reference || "—";
-
-      document.querySelector("#country").textContent =
-        account.country || "—";
-
-      document.querySelector("#mobile").textContent =
-        account.mobile || "—";
-
-      document.querySelector("#alternate").textContent =
-        account.alternateMobile || "—";
-
-      document.querySelector("#address").textContent =
-        account.address || "—";
-    }
+      window.location.href = "/dashboard";
+    });
   </script>
 
 </body>
