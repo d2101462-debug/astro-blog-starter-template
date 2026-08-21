@@ -1,203 +1,98 @@
 ---
+import { supabase } from "../lib/supabase";
 ---
 
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Account Services — Sign In</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f4f7fb;
+        font-family: Arial, sans-serif;
+      }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #172b4d;
-    }
-
-    .topbar {
-      background: #123b70;
-      color: white;
-      padding: 12px 6%;
-      font-size: 14px;
-    }
-
-    .header {
-      background: white;
-      border-bottom: 1px solid #d8dee8;
-      padding: 24px 7%;
-      font-size: 25px;
-      font-weight: 700;
-    }
-
-    .container {
-      max-width: 760px;
-      margin: 35px auto;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 40px;
-      border: 1px solid #d8dee8;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    }
-
-    .illustration {
-      height: 125px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      margin-bottom: 20px;
-    }
-
-    .circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #dbeafe;
-      border: 3px solid #2764a5;
-    }
-
-    .shield {
-      width: 60px;
-      height: 72px;
-      background: #2764a5;
-      clip-path: polygon(50% 0, 90% 15%, 85% 65%, 50% 100%, 15% 65%, 10% 15%);
-    }
-
-    h1 {
-      font-size: 30px;
-      margin-bottom: 12px;
-      color: #172b4d;
-    }
-
-    .notice {
-      font-size: 17px;
-      line-height: 1.5;
-      margin-bottom: 28px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 30px;
-      margin-bottom: 30px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .tabs a {
-      padding: 12px 5px;
-      text-decoration: none;
-      color: #175a9c;
-      font-weight: 700;
-    }
-
-    .tabs .active {
-      border-bottom: 4px solid #175a9c;
-    }
-
-    label {
-      display: block;
-      margin: 18px 0 7px;
-      font-weight: 700;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #8a98a8;
-      border-radius: 3px;
-      font-size: 16px;
-    }
-
-    .sample-note {
-      margin-top: 20px;
-      padding: 12px;
-      background: #eef5ff;
-      border-left: 4px solid #2764a5;
-      font-size: 14px;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 15px;
-      border: 0;
-      border-radius: 4px;
-      background: #2764a5;
-      color: white;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1d4f83;
-    }
-
-    .footer {
-      text-align: center;
-      margin: 25px 0;
-      font-size: 13px;
-      color: #65758b;
-    }
-
-    @media (max-width: 600px) {
       .card {
-        padding: 25px;
+        width: 360px;
+        padding: 32px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 8px 30px rgba(0,0,0,.08);
       }
 
-      .header {
-        font-size: 21px;
+      h1 {
+        margin: 0 0 8px;
+        text-align: center;
       }
-    }
-  </style>
-</head>
 
-<body>
+      .notice {
+        text-align: center;
+        color: #666;
+        font-size: 13px;
+        margin-bottom: 25px;
+      }
 
-  <div class="topbar">
-    Fictional Account Services
-  </div>
+      label {
+        display: block;
+        margin: 14px 0 6px;
+        font-size: 14px;
+      }
 
-  <div class="header">
-    Account Services
-  </div>
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccd3dc;
+        border-radius: 8px;
+        font-size: 15px;
+      }
 
-  <main class="container">
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        border: 0;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+      }
 
-    <section class="card">
+      button:hover {
+        background: #1d4ed8;
+      }
 
-      <div class="illustration">
-        <div class="circle"></div>
-        <div class="shield"></div>
-        <div class="circle"></div>
+      #message {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="card">
+      <h1>Sign In</h1>
+
+      <div class="notice">
+        Fictional test application
       </div>
 
-      <h1>Sign in to your account</h1>
-
-      <p class="notice">
-        Sign in to access your Account Services dashboard.
-      </p>
-
-      <div class="tabs">
-        <a class="active" href="/login">Sign in</a>
-        <a href="/">Create an account</a>
-      </div>
-
-      <form id="loginForm">
-
-        <label for="email">Email address</label>
+      <form id="login-form">
+        <label for="email">Email</label>
         <input
           id="email"
           type="email"
-          placeholder="name@example.com"
+          placeholder="you@example.com"
           required
         />
 
@@ -205,55 +100,42 @@
         <input
           id="password"
           type="password"
-          placeholder="Enter your password"
+          placeholder="Password"
           required
         />
 
-        <label style="font-weight: normal;">
-          <input
-            id="showPassword"
-            type="checkbox"
-            style="width:auto; margin-right:8px;"
-          />
-          Show password
-        </label>
+        <button type="submit">Sign In</button>
 
-        <div class="sample-note">
-          This is a fictional sample application and is not affiliated
-          with any government or financial institution.
-        </div>
-
-        <button type="submit">
-          Sign in
-        </button>
-
+        <div id="message"></div>
       </form>
+    </main>
 
-    </section>
+    <script>
+      import { supabase } from "../lib/supabase";
 
-    <div class="footer">
-      Fictional Account Services
-    </div>
+      const form = document.querySelector("#login-form");
+      const message = document.querySelector("#message");
 
-  </main>
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-  <script>
-    const password = document.getElementById("password");
-    const showPassword = document.getElementById("showPassword");
-    const form = document.getElementById("loginForm");
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
 
-    showPassword.addEventListener("change", () => {
-      password.type = showPassword.checked ? "text" : "password";
-    });
+        message.textContent = "Signing in...";
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
 
-      // UI-only sample navigation.
-      // No credentials are sent or stored.
-      window.location.href = "/dashboard";
-    });
-  </script>
+        if (error) {
+          message.textContent = error.message;
+          return;
+        }
 
-</body>
+        window.location.href = "/dashboard";
+      });
+    </script>
+  </body>
 </html>
