@@ -323,9 +323,10 @@ const countries = [
         address: document.querySelector("#address").value
       };
 
-      sessionStorage.setItem(
-        "fictionalAccount",
-        JSON.stringify(account)
+      localStorage.setItem(
+  "fictionalAccount",
+  JSON.stringify(account)
+);
       );
 
       window.location.href = "/dashboard";
