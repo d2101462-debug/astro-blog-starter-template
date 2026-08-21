@@ -1,12 +1,9 @@
----
----
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Secure Account Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create an Account</title>
 
   <style>
     * {
@@ -15,106 +12,46 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6fb;
-      color: #172033;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #111827;
     }
 
-    .page {
-      min-height: 100vh;
-    }
-
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid #d9dee8;
-      padding: 18px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: 700;
-      color: #3436bd;
-    }
-
-    .logo small {
-      display: block;
-      margin-top: 4px;
-      color: #667085;
-      font-size: 12px;
-      font-weight: 400;
-    }
-
-    .support {
-      color: #3436bd;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    main {
+    .container {
       max-width: 850px;
-      margin: 45px auto;
-      padding: 0 25px;
-    }
-
-    .intro {
-      text-align: center;
-    }
-
-    .intro h1 {
-      font-size: 27px;
-      margin: 0 0 10px;
-    }
-
-    .intro p {
-      max-width: 650px;
-      margin: 0 auto;
-      font-size: 16px;
-      line-height: 1.5;
-      font-weight: 600;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin: 28px 0 35px;
-    }
-
-    .top-button {
-      padding: 13px 40px;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .sign-in {
-      background: white;
-      color: #3436bd;
-      border: 1px solid #3436bd;
-    }
-
-    .create {
-      background: #3436bd;
-      color: white;
-      border: 1px solid #3436bd;
-    }
-
-    .form-card {
-      background: white;
+      margin: 40px auto;
       padding: 30px;
-      border-radius: 8px;
-      border: 1px solid #dce1e8;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
     }
 
-    form {
+    .tabs {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 45px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 17px;
+      border-radius: 8px;
+      font-size: 17px;
+      cursor: pointer;
+      border: 2px solid #2437c7;
+      background: white;
+      color: #2437c7;
+    }
+
+    .tabs .active {
+      background: #2437c7;
+      color: white;
+    }
+
+    .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      column-gap: 35px;
-      row-gap: 20px;
+      gap: 24px 30px;
     }
 
     .field {
@@ -122,98 +59,70 @@
       flex-direction: column;
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
-
     label {
+      font-size: 17px;
       font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
     }
 
     input,
     select {
       width: 100%;
-      height: 48px;
-      border: 1px solid #cbd2dc;
-      border-radius: 6px;
-      padding: 0 14px;
-      font-size: 15px;
-      color: #172033;
-      background: white;
+      height: 58px;
+      padding: 0 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #f8fafc;
+      font-size: 17px;
+      color: #172554;
+      outline: none;
     }
 
     input:focus,
     select:focus {
-      outline: none;
-      border-color: #3436bd;
-      box-shadow: 0 0 0 2px rgba(52, 54, 189, 0.12);
+      border: 2px solid #3b82f6;
+      background: white;
     }
 
-    .hint {
+    .full {
       grid-column: 1 / -1;
-      color: #667085;
-      font-size: 13px;
-      margin-top: -3px;
+    }
+
+    .note {
+      margin-top: 25px;
+      color: #64748b;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     .submit {
-      grid-column: 1 / -1;
-      height: 50px;
-      border: none;
-      border-radius: 6px;
-      background: #167f8c;
+      margin-top: 28px;
+      width: 100%;
+      height: 55px;
+      border: 0;
+      border-radius: 8px;
+      background: #2437c7;
       color: white;
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 700;
       cursor: pointer;
     }
 
     .submit:hover {
-      background: #126d77;
-    }
-
-    footer {
-      text-align: center;
-      color: #7a8493;
-      font-size: 12px;
-      margin: 25px 0;
+      background: #1d2eaa;
     }
 
     @media (max-width: 700px) {
-      header {
-        padding: 18px 20px;
-      }
-
-      .support {
-        display: none;
-      }
-
-      main {
-        margin: 25px auto;
-        padding: 0 15px;
-      }
-
-      .buttons {
-        flex-direction: column;
-      }
-
-      .top-button {
-        text-align: center;
-      }
-
-      form {
+      .form-grid {
         grid-template-columns: 1fr;
       }
 
-      .full,
-      .hint,
-      .submit {
+      .full {
         grid-column: auto;
       }
 
-      .form-card {
+      .container {
+        margin: 15px;
         padding: 20px;
       }
     }
@@ -221,176 +130,140 @@
 </head>
 
 <body>
-  <div class="page">
 
-    <header>
-      <div class="logo">
-        Secure Account Portal
-        <small>Online Financial Services</small>
-      </div>
+  <div class="container">
 
-      <div class="support">
-        Support: 1-800-555-0147
-      </div>
-    </header>
+    <div class="tabs">
+      <button>Sign in</button>
+      <button class="active">Create an account</button>
+    </div>
 
-    <main>
+    <form id="registrationForm">
 
-      <section class="intro">
-        <h1>Create Your Secure Account</h1>
+      <div class="form-grid">
 
-        <p>
-          Create an account to access your secure online financial-service
-          portal.
-        </p>
-
-        <div class="buttons">
-          <a class="top-button sign-in" href="/login">
-            Sign in
-          </a>
-
-         <a class="top-button create" href="/dashboard">
-           Create an account
-         </a>
-            
+        <div class="field">
+          <label>Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Enter your name"
+            required
+          >
         </div>
-      </section>
 
-      <section class="form-card" id="registration">
+        <div class="field">
+          <label>Email Address</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+          >
+        </div>
 
-        <form id="registrationForm">
+        <div class="field">
+          <label>Reference ID</label>
+          <input
+            type="text"
+            name="referenceId"
+            placeholder="Optional reference ID"
+          >
+        </div>
 
-          <div class="field">
-            <label for="name">Full Name</label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
+        <div class="field">
+          <label>Country</label>
+          <select name="country">
+            <option>United States</option>
+            <option>Canada</option>
+            <option>United Kingdom</option>
+            <option>India</option>
+            <option>Australia</option>
+          </select>
+        </div>
 
-          <div class="field">
-            <label for="email">Email Address</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              required
-            />
-          </div>
+        <div class="field">
+          <label>Mobile</label>
+          <input
+            type="tel"
+            name="mobile"
+            placeholder="Enter mobile number"
+          >
+        </div>
 
-          <div class="field">
-            <label for="country">Country</label>
+        <div class="field">
+          <label>Alternate Mobile</label>
+          <input
+            type="tel"
+            name="alternateMobile"
+            placeholder="Optional"
+          >
+        </div>
 
-            <select id="country" required>
-              <option value="">Select country</option>
-              <option>United States</option>
-              <option>Canada</option>
-              <option>United Kingdom</option>
-              <option>India</option>
-              <option>Australia</option>
-            </select>
-          </div>
+        <div class="field full">
+          <label>Registered Address</label>
+          <input
+            type="text"
+            name="address"
+            placeholder="Enter your address"
+          >
+        </div>
 
-          <div class="field">
-            <label for="mobile">Mobile</label>
-            <input
-              id="mobile"
-              type="tel"
-              placeholder="Enter mobile number"
-              required
-            />
-          </div>
+        <div class="field">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Create a password"
+            autocomplete="new-password"
+            required
+          >
+        </div>
 
-          <div class="field full">
-            <label for="address">Registered Address</label>
-            <input
-              id="address"
-              type="text"
-              placeholder="Enter your address"
-              required
-            />
-          </div>
+        <div class="field">
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm password"
+            autocomplete="new-password"
+            required
+          >
+        </div>
 
-          <div class="field">
-            <label for="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              minlength="6"
-              placeholder="At least 6 characters"
-              required
-            />
-          </div>
+      </div>
 
-          <div class="field">
-            <label for="confirmPassword">Confirm Password</label>
-            <input
-              id="confirmPassword"
-              type="password"
-              minlength="6"
-              placeholder="Re-enter password"
-              required
-            />
-          </div>
+      <p class="note">
+        Account information will be generated after registration.
+        This demonstration does not request or store government
+        identification numbers.
+      </p>
 
-          <div class="hint">
-            Account number will be generated automatically after registration.
-          </div>
+      <button class="submit" type="submit">
+        Create Account
+      </button>
 
-          <button class="submit" type="submit">
-            Create Account
-          </button>
-
-        </form>
-
-      </section>
-
-      <footer>
-        Secure Account Portal · Fictional financial-service interface
-      </footer>
-
-    </main>
+    </form>
 
   </div>
 
   <script>
-    const form = document.getElementById("registrationForm");
+    document
+      .getElementById("registrationForm")
+      .addEventListener("submit", function(event) {
 
-    form?.addEventListener("submit", (event) => {
-      event.preventDefault();
+        event.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const country = document.getElementById("country").value;
-      const mobile = document.getElementById("mobile").value.trim();
-      const address = document.getElementById("address").value.trim();
+        const password = this.password.value;
+        const confirmPassword = this.confirmPassword.value;
 
-      const password = document.getElementById("password").value;
-      const confirmPassword =
-        document.getElementById("confirmPassword").value;
+        if (password !== confirmPassword) {
+          alert("Passwords do not match.");
+          return;
+        }
 
-      if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return;
-      }
-
-      const account = {
-        name,
-        email,
-        country,
-        mobile,
-        address
-      };
-
-      localStorage.setItem(
-        "account",
-        JSON.stringify(account)
-      );
-
-      window.location.href = "/dashboard";
-    });
+        alert("Account created successfully.");
+      });
   </script>
 
 </body>
