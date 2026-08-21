@@ -329,7 +329,9 @@ const countries = [
   JSON.stringify(account)
       );
 
-      window.location.href = "/dashboard";
+sessionStorage.setItem("loggedIn", "true");
+
+window.location.href = "/dashboard";
     });
   </script>
 
