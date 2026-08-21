@@ -6,7 +6,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Account Dashboard</title>
+
+  <title>Account Portal</title>
 
   <style>
     * {
@@ -15,126 +16,341 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f4f7fb;
-      color: #172033;
+      color: #17213a;
     }
 
-    .topbar {
-      background: #172033;
+    /* TOP NAVIGATION */
+
+    .navbar {
+      height: 68px;
+      background: #20265f;
       color: white;
-      padding: 18px 30px;
+
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+
+      padding: 0 35px;
     }
 
-    .brand {
-      font-size: 21px;
-      font-weight: bold;
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
     }
 
-    .logout {
+    .logout-btn {
       background: white;
-      color: #172033;
-      border: 0;
-      border-radius: 6px;
+      color: #20265f;
+
+      border: none;
+      border-radius: 7px;
+
       padding: 10px 18px;
+
+      font-size: 14px;
+      font-weight: 600;
+
       cursor: pointer;
-      font-weight: bold;
     }
+
+    .logout-btn:hover {
+      background: #e9ecf5;
+    }
+
+    /* MAIN */
 
     .container {
-      width: 92%;
-      max-width: 1100px;
-      margin: 35px auto;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 25px 60px;
     }
 
+    /* WELCOME */
+
     .welcome {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
     .welcome h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
+      margin: 0;
+      font-size: 31px;
+      font-weight: 600;
+      color: #20265f;
     }
 
     .welcome p {
-      margin: 0;
-      color: #687386;
+      margin-top: 8px;
+      color: #68738a;
+      font-size: 15px;
     }
 
-    .grid {
+    /* GRID */
+
+    .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+
+      grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(300px, 1fr);
+
+      gap: 22px;
     }
+
+    /* CARDS */
 
     .card {
       background: white;
+
+      border: 1px solid #e4e8ef;
+
       border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+      padding: 28px;
+
+      box-shadow:
+        0 4px 18px rgba(31, 42, 70, 0.05);
     }
 
-    .balance-card {
-      grid-column: span 2;
-    }
-
-    .label {
-      color: #687386;
+    .card-title {
+      color: #667085;
       font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .balance {
-      font-size: 38px;
-      font-weight: bold;
       margin-bottom: 12px;
     }
 
-    .account {
-      color: #687386;
+    /* BALANCE */
+
+    .balance-card {
+      min-height: 190px;
+    }
+
+    .balance {
+      font-size: 42px;
+      font-weight: 600;
+      color: #20265f;
+
+      margin-bottom: 12px;
+    }
+
+    .account-number {
+      color: #737d91;
       font-size: 14px;
     }
 
-    .card h2 {
-      margin-top: 0;
+    /* ACCOUNT INFORMATION */
+
+    .account-card h2 {
+      margin: 0 0 22px;
+
+      font-size: 20px;
+      color: #20265f;
+    }
+
+    .info-row {
+      margin-bottom: 18px;
+    }
+
+    .info-label {
+      display: block;
+
+      font-size: 12px;
+
+      color: #7a8498;
+
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 500;
+
+      color: #252d43;
+
+      word-break: break-word;
+    }
+
+    /* STATUS */
+
+    .status-card {
+      margin-top: 22px;
+    }
+
+    .status-card h2 {
+      margin: 0 0 12px;
+
+      font-size: 20px;
+
+      color: #20265f;
+    }
+
+    .status-text {
+      color: #667085;
+
+      font-size: 14px;
+
+      margin-bottom: 15px;
+    }
+
+    .status-badge {
+      display: inline-block;
+
+      background: #e6f7ec;
+
+      color: #218447;
+
+      border-radius: 20px;
+
+      padding: 7px 13px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+    /* QUICK ACTIONS */
+
+    .actions-card {
+      margin-top: 22px;
+    }
+
+    .actions-card h2 {
+      margin: 0 0 20px;
+
+      font-size: 20px;
+
+      color: #20265f;
+    }
+
+    .actions {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 12px;
+    }
+
+    .action {
+      border: 1px solid #dfe4ed;
+
+      background: #f9fafc;
+
+      border-radius: 8px;
+
+      padding: 16px;
+
+      text-align: center;
+
+      color: #20265f;
+
+      font-size: 14px;
+
+      cursor: pointer;
+    }
+
+    .action:hover {
+      background: #eef1f8;
+    }
+
+    /* ACTIVITY */
+
+    .activity-card {
+      grid-column: 1 / -1;
+
+      margin-top: 22px;
+    }
+
+    .activity-card h2 {
+      margin: 0 0 20px;
+
+      color: #20265f;
+
       font-size: 20px;
     }
 
-    .activity {
-      margin-top: 25px;
+    .activity-table {
+      width: 100%;
+
+      border-collapse: collapse;
     }
 
-    .transaction {
-      display: flex;
-      justify-content: space-between;
-      padding: 16px 0;
-      border-bottom: 1px solid #e5e9ef;
-    }
+    .activity-table th,
+    .activity-table td {
+      padding: 15px 10px;
 
-    .transaction:last-child {
-      border-bottom: 0;
-    }
+      border-bottom: 1px solid #edf0f4;
 
-    .transaction-name {
-      font-weight: bold;
-    }
+      text-align: left;
 
-    .transaction-date {
-      color: #7b8494;
       font-size: 13px;
-      margin-top: 4px;
     }
 
-    @media (max-width: 750px) {
-      .grid {
+    .activity-table th {
+      color: #707a8e;
+
+      font-weight: 600;
+    }
+
+    .empty {
+      text-align: center !important;
+
+      color: #8a93a4;
+
+      padding: 35px !important;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      text-align: center;
+
+      margin-top: 40px;
+
+      color: #8a93a4;
+
+      font-size: 12px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      .navbar {
+        padding: 0 18px;
+      }
+
+      .container {
+        padding: 25px 15px 40px;
+      }
+
+      .welcome h1 {
+        font-size: 25px;
+      }
+
+      .dashboard-grid {
         grid-template-columns: 1fr;
       }
 
-      .balance-card {
-        grid-column: span 1;
+      .activity-card {
+        grid-column: auto;
+      }
+
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+      .balance {
+        font-size: 34px;
+      }
+
+      .activity-table {
+        min-width: 650px;
+      }
+
+      .activity-card {
+        overflow-x: auto;
       }
     }
   </style>
@@ -142,105 +358,386 @@
 
 <body>
 
-  <header class="topbar">
-    <div class="brand">Account Portal</div>
+  <!-- NAVIGATION -->
 
-    <button class="logout" id="logoutButton">
-      Logout
+  <header class="navbar">
+
+    <div class="logo">
+      Account Portal
+    </div>
+
+    <button
+      id="logoutButton"
+      class="logout-btn"
+    >
+      Log Out
     </button>
+
   </header>
+
+
+  <!-- MAIN CONTENT -->
 
   <main class="container">
 
+    <!-- WELCOME -->
+
     <section class="welcome">
-      <h1 id="welcomeName">Welcome</h1>
-      <p>Manage your account and view your account information.</p>
+
+      <h1 id="welcomeName">
+        Welcome
+      </h1>
+
+      <p>
+        Manage your account and view your account information.
+      </p>
+
     </section>
 
-    <section class="grid">
 
-      <div class="card balance-card">
-        <div class="label">Account Balance</div>
+    <!-- DASHBOARD -->
 
-        <div class="balance">$25,000.00</div>
+    <div class="dashboard-grid">
 
-        <div class="account">
-          Account •••• 4821
+
+      <!-- BALANCE -->
+
+      <section class="card balance-card">
+
+        <div class="card-title">
+          Account Balance
         </div>
-      </div>
 
-      <div class="card">
-        <h2>Account Information</h2>
-
-        <div class="label">Account holder</div>
-        <strong id="accountName">—</strong>
-
-        <div class="label" style="margin-top:18px;">
-          Email
+        <div
+          class="balance"
+          id="accountBalance"
+        >
+          $0.00
         </div>
-        <strong id="accountEmail">—</strong>
-      </div>
 
-      <div class="card">
-        <h2>Account Status</h2>
+        <div class="account-number">
 
-        <p>
+          Account
+          <span id="accountNumber">
+            •••• 0000
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- ACCOUNT INFORMATION -->
+
+      <section class="card account-card">
+
+        <h2>
+          Account Information
+        </h2>
+
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Account holder
+          </span>
+
+          <span
+            class="info-value"
+            id="accountHolder"
+          >
+            —
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Email
+          </span>
+
+          <span
+            class="info-value"
+            id="accountEmail"
+          >
+            —
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Account type
+          </span>
+
+          <span class="info-value">
+            Personal
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- STATUS -->
+
+      <section class="card status-card">
+
+        <h2>
+          Account Status
+        </h2>
+
+        <div class="status-text">
           Your account portal is active.
-        </p>
-      </div>
-
-    </section>
-
-    <section class="card activity">
-      <h2>Recent Activity</h2>
-
-      <div class="transaction">
-        <div>
-          <div class="transaction-name">Account Created</div>
-          <div class="transaction-date">Recent activity</div>
         </div>
 
-        <div>—</div>
-      </div>
+        <span class="status-badge">
+          ACTIVE
+        </span>
 
-      <div class="transaction">
-        <div>
-          <div class="transaction-name">Profile Information</div>
-          <div class="transaction-date">Recent activity</div>
+      </section>
+
+
+      <!-- QUICK ACTIONS -->
+
+      <section class="card actions-card">
+
+        <h2>
+          Quick Actions
+        </h2>
+
+        <div class="actions">
+
+          <button class="action">
+            View Account
+          </button>
+
+          <button class="action">
+            Transactions
+          </button>
+
+          <button class="action">
+            Settings
+          </button>
+
         </div>
 
-        <div>—</div>
-      </div>
+      </section>
 
-    </section>
+
+      <!-- RECENT ACTIVITY -->
+
+      <section class="card activity-card">
+
+        <h2>
+          Recent Activity
+        </h2>
+
+        <table class="activity-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Date
+              </th>
+
+              <th>
+                Activity
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Amount
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr>
+
+              <td
+                colspan="4"
+                class="empty"
+              >
+                No recent activity.
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </section>
+
+    </div>
+
+
+    <div class="footer">
+      Account Portal
+    </div>
 
   </main>
 
+
+  <!-- ACCOUNT SCRIPT -->
+
   <script>
-    const loggedIn = sessionStorage.getItem("loggedIn");
-    const savedAccount = localStorage.getItem("fictionalAccount");
 
-    if (loggedIn !== "true" || !savedAccount) {
-      window.location.href = "/login";
-    } else {
-      const account = JSON.parse(savedAccount);
+    const savedAccount =
+      localStorage.getItem("fictionalAccount");
 
-      document.getElementById("welcomeName").textContent =
-        `Welcome, ${account.fullName}`;
 
-      document.getElementById("accountName").textContent =
-        account.fullName;
+    if (savedAccount) {
 
-      document.getElementById("accountEmail").textContent =
-        account.email;
+      try {
+
+        const account =
+          JSON.parse(savedAccount);
+
+
+        /* NAME */
+
+        const welcomeName =
+          document.getElementById(
+            "welcomeName"
+          );
+
+        const accountHolder =
+          document.getElementById(
+            "accountHolder"
+          );
+
+
+        if (
+          account.fullName
+        ) {
+
+          welcomeName.textContent =
+            `Welcome, ${account.fullName}`;
+
+          accountHolder.textContent =
+            account.fullName;
+
+        }
+
+
+        /* EMAIL */
+
+        const accountEmail =
+          document.getElementById(
+            "accountEmail"
+          );
+
+
+        if (account.email) {
+
+          accountEmail.textContent =
+            account.email;
+
+        }
+
+
+        /* ACCOUNT NUMBER */
+
+        const accountNumber =
+          document.getElementById(
+            "accountNumber"
+          );
+
+
+        if (account.accountNumber) {
+
+          const number =
+            String(
+              account.accountNumber
+            );
+
+          accountNumber.textContent =
+            `•••• ${number.slice(-4)}`;
+
+        }
+
+
+        /* BALANCE */
+
+        const balance =
+          document.getElementById(
+            "accountBalance"
+          );
+
+
+        if (
+          account.balance !== undefined
+        ) {
+
+          const amount =
+            Number(account.balance);
+
+
+          if (!Number.isNaN(amount)) {
+
+            balance.textContent =
+              amount.toLocaleString(
+                "en-US",
+                {
+                  style: "currency",
+                  currency: "USD"
+                }
+              );
+
+          }
+
+        }
+
+
+      } catch (error) {
+
+        console.error(
+          "Unable to load account:",
+          error
+        );
+
+      }
+
     }
 
-    const logoutButton = document.getElementById("logoutButton");
 
-    logoutButton?.addEventListener("click", () => {
-      sessionStorage.removeItem("loggedIn");
-      window.location.href = "/login";
-    });
+    /* LOGOUT */
+
+    const logoutButton =
+      document.getElementById(
+        "logoutButton"
+      );
+
+
+    logoutButton?.addEventListener(
+      "click",
+      () => {
+
+        sessionStorage.removeItem(
+          "loggedIn"
+        );
+
+        window.location.href =
+          "/login";
+
+      }
+    );
+
   </script>
 
 </body>
