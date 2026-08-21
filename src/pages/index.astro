@@ -1,141 +1,336 @@
 ---
-import { supabase } from "../lib/supabase";
+const countries = [
+  "United States",
+  "Canada",
+  "United Kingdom",
+  "Australia"
+];
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create an Account</title>
 
-    <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f4f7fb;
-        font-family: Arial, sans-serif;
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 35px 45px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 25px rgba(0,0,0,.08);
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .heading h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .heading p {
+      font-weight: 600;
+      margin: 8px 0;
+    }
+
+    .fictional {
+      font-size: 11px;
+      color: #64748b;
+      letter-spacing: 1px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .tabs button {
+      height: 52px;
+      padding: 0 40px;
+      border-radius: 7px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .signin {
+      background: white;
+      color: #2437c7;
+      border: 1px solid #2437c7;
+    }
+
+    .active {
+      background: #2437c7;
+      color: white;
+      border: 1px solid #2437c7;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 28px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      margin-bottom: 8px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    input,
+    select {
+      height: 53px;
+      padding: 0 17px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      background: #fafcff;
+      font-size: 16px;
+      color: #172033;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border: 2px solid #60a5fa;
+    }
+
+    .note {
+      margin: 24px 0 18px;
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .create {
+      width: 100%;
+      height: 54px;
+      border: none;
+      border-radius: 7px;
+      background: #159e9e;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        margin: 15px;
+        padding: 25px 20px;
       }
 
-      .card {
-        width: 360px;
-        padding: 32px;
-        background: white;
-        border-radius: 14px;
-        box-shadow: 0 8px 30px rgba(0,0,0,.08);
+      .form-grid {
+        grid-template-columns: 1fr;
       }
 
-      h1 {
-        margin: 0 0 8px;
-        text-align: center;
+      .full {
+        grid-column: auto;
       }
+    }
+  </style>
+</head>
 
-      .notice {
-        text-align: center;
-        color: #666;
-        font-size: 13px;
-        margin-bottom: 25px;
-      }
+<body>
 
-      label {
-        display: block;
-        margin: 14px 0 6px;
-        font-size: 14px;
-      }
+  <main class="container">
 
-      input {
-        box-sizing: border-box;
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccd3dc;
-        border-radius: 8px;
-        font-size: 15px;
-      }
+    <div class="heading">
+      <h1>FRS Gateway</h1>
+      <p>Create an account to continue</p>
+      <span class="fictional">FRS Gareway</span>
+    </div>
 
-      button {
-        width: 100%;
-        margin-top: 20px;
-        padding: 12px;
-        border: 0;
-        border-radius: 8px;
-        background: #2563eb;
-        color: white;
-        font-size: 15px;
-        cursor: pointer;
-      }
+    <div class="tabs">
+      <button
+        type="button"
+        class="signin"
+        onclick="window.location.href='/'"
+      >
+        Sign in
+      </button>
 
-      button:hover {
-        background: #1d4ed8;
-      }
+      <button type="button" class="active">
+        Create an account
+      </button>
+    </div>
 
-      #message {
-        margin-top: 15px;
-        text-align: center;
-        font-size: 14px;
-      }
-    </style>
-  </head>
+    <form id="registration-form">
 
-  <body>
-    <main class="card">
-      <h1>Sign In</h1>
+      <div class="form-grid">
 
-      <div class="notice">
-        Fictional test application
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input
+            id="fullName"
+            type="text"
+            placeholder="Example User"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="user@example.com"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="reference">SSN</label>
+          <input
+            id="reference"
+            type="text"
+            placeholder="FG-000000"
+          />
+        </div>
+
+        <div class="field">
+          <label for="country">Country</label>
+          <select id="country">
+            {countries.map((country) => (
+              <option value={country}>{country}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="mobile">Mobile</label>
+          <input
+            id="mobile"
+            type="tel"
+            placeholder="000-000-0000"
+          />
+        </div>
+
+        <div class="field">
+          <label for="alternate">Alternate Mobile</label>
+          <input
+            id="alternate"
+            type="tel"
+            placeholder="000-000-0000"
+          />
+        </div>
+
+        <div class="field full">
+          <label for="address">Registered Address</label>
+          <input
+            id="address"
+            type="text"
+            placeholder="123 Example Street, Example City"
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Create a password"
+            minlength="6"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            placeholder="Re-enter Password"
+            required
+          />
+        </div>
+
       </div>
 
-      <form id="login-form">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="you@example.com"
-          required
-        />
+      <p class="note">
+        Account information will be generated after signup.
+        This fictional application does not request government
+        identification numbers.
+      </p>
 
-        <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          placeholder="Password"
-          required
-        />
+      <button class="create" type="submit">
+        Create Account
+      </button>
 
-        <button type="submit">Sign In</button>
+      <div id="message"></div>
 
-        <div id="message"></div>
-      </form>
-    </main>
+    </form>
 
-    <script>
-      import { supabase } from "../lib/supabase";
+  </main>
 
-      const form = document.querySelector("#login-form");
-      const message = document.querySelector("#message");
+  <script>
+    const form = document.querySelector("#registration-form");
+    const message = document.querySelector("#message");
 
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-        const email = document.querySelector("#email").value;
-        const password = document.querySelector("#password").value;
+      const password =
+        document.querySelector("#password").value;
 
-        message.textContent = "Signing in...";
+      const confirmPassword =
+        document.querySelector("#confirmPassword").value;
 
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
+      if (password !== confirmPassword) {
+        message.textContent = "Passwords do not match.";
+        return;
+      }
 
-        if (error) {
-          message.textContent = error.message;
-          return;
-        }
+      const account = {
+        fullName: document.querySelector("#fullName").value,
+        email: document.querySelector("#email").value,
+        reference: document.querySelector("#reference").value,
+        country: document.querySelector("#country").value,
+        mobile: document.querySelector("#mobile").value,
+        alternate: document.querySelector("#alternate").value,
+        address: document.querySelector("#address").value
+      };
 
-        window.location.href = "/dashboard";
-      });
-    </script>
-  </body>
+      sessionStorage.setItem(
+        "fictionalAccount",
+        JSON.stringify(account)
+      );
+
+      window.location.href = "/dashboard";
+    });
+  </script>
+
+</body>
 </html>
