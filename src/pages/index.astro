@@ -320,13 +320,13 @@ const countries = [
         country: document.querySelector("#country").value,
         mobile: document.querySelector("#mobile").value,
         alternate: document.querySelector("#alternate").value,
-        address: document.querySelector("#address").value
+        address: document.querySelector("#address").value,
+        password: password,
       };
 
       localStorage.setItem(
   "fictionalAccount",
   JSON.stringify(account)
-);
       );
 
       window.location.href = "/dashboard";
